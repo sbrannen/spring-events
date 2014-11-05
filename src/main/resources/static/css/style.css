@@ -1,0 +1,329 @@
+/* ----- Global ------------------------------------------------------------- */
+body,html {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.9em;
+	height: 101%;
+	color: #000;
+	text-align: center;
+	margin: 0 auto;
+}
+
+* {
+	margin: 0px auto;
+}
+
+h1 {
+	color: #369;
+}
+
+a, a:link, a:active, a:visited {
+	color: #369;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #147;
+	text-decoration: underline;
+}
+
+a img {
+	border: none;
+	vertical-align: middle;
+}
+
+th {
+	white-space: nowrap;
+}
+
+fieldset {
+	border: 1px #369 solid;
+	margin: 5px 0 10px 0;
+	padding: 5px;
+	text-align: left;
+}
+
+legend {
+	margin: 0;
+	padding: 2px 6px;
+	background-color: #369;
+	border: 1px #369 solid;
+	color: white;
+	font-weight: bold;
+}
+
+/* ----- DIVs --------------------------------------------------------------- */
+#pagemargin {
+	width: 826px;
+	margin: 0 auto;
+	padding: 0px;
+	border: 1px #369 solid;
+	text-align: left;
+}
+
+#header {
+	background-color: #FFF;
+	color: #000;
+	text-align: left;
+}
+
+#navigation {
+	background-color: #369;
+	height: 16px;
+}
+
+#content {
+	padding: 15px;
+	background-color: #fff;
+	color: #000;
+	margin-bottom: 0px;
+	text-align: left;
+}
+
+#footer {
+	padding: 5px;
+	height: 15px;
+	background-color: #F4F9FF;
+	color: #000;
+	margin-top: 20px;
+	font-size: 11px;
+	text-align: center;
+}
+
+/* --- Common --------------------------------------------------------------- */
+.boxleft {
+	padding: 5px;
+	float: left;
+	background-color: #FFF;
+	color: #000;
+	width: 480px;
+	height: 119px;
+}
+
+.logo {
+	// float: right;
+	width: 100%;
+	font-size: 20px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.clear {
+	clear: both;
+}
+
+.right {
+	float: right;
+}
+
+.bar {
+	padding: 5px;
+	height: 20px;
+	background-color: #F4F9FF;
+	color: #000;
+	text-align: right;
+	border-bottom: 1px #369 solid;
+}
+
+.bar span {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.bar span a {
+	color: #369;
+	text-decoration: none;
+}
+
+.bar span a:hover {
+	color: #147;
+	text-decoration: underline;
+}
+
+.bar a img {
+	border: none;
+	vertical-align: middle;
+}
+
+.right_aligned {
+	text-align: right;
+}
+
+.left_aligned {
+	text-align: left;
+	float: left;
+}
+
+input.btnsmall, .eventForm div.row div input.btnsmall, button.btnsmall {
+	width: 100px;
+	height: 18px;
+	border: 0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	cursor: pointer;
+	color: #369;
+	margin: 0;
+	padding: 0 0 2px 0;
+}
+
+/* ----- Errors ------------------------------------------------------------- */
+.error {
+	color: #B22;
+}
+
+.row span.error {
+	float: right;
+}
+
+.row .col div {
+	margin: 0;
+	padding: 0;
+}
+
+.row .col div input.text, .row .col div select, .row .col div span.error {
+	display: block;
+	clear: both;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.row .col div span.error {
+	white-space: nowrap;
+	margin: 0;
+	padding: 0;
+}
+
+/* ----- Event Form --------------------------------------------------------- */
+
+.eventForm div {
+	float: left;
+	margin: 5px 0;
+}
+
+.eventForm div .right {
+	float: right;
+	margin: 0;
+}
+
+.eventForm div.row {
+	clear: left;
+	float: left;
+	margin: 0;
+	padding: 8px 0 2px 0;
+	width: 100%;
+}
+
+.eventForm div.row div input {
+	width: 100%;
+}
+
+.eventForm label, .eventForm .label {
+	width: 130px;
+	float: left;
+	padding-right: 5px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.eventForm .row .col {
+	margin: 0px;
+	padding: 0px;
+}
+
+.eventForm .row .col label {
+	margin: 0px;
+	padding: 0px;
+	padding-right: 5px;
+}
+
+.eventForm .row .col input {
+	margin: 0px;
+	padding: 0px;
+	padding-left: 2px;
+}
+
+.eventForm input.text, .eventForm select, .eventForm textarea {
+	margin: 0;
+	border: 1px #b3b3b3 solid;
+	width: 230px;
+}
+
+.eventForm .row .col, .eventForm .row .col .label, .eventForm .row .col .output {
+	margin: 0;
+}
+
+.eventForm .row .col .output {
+	padding-left: 2px;
+	margin: 0;
+	border: 1px #FFF solid;
+	width: 230px;
+}
+
+.eventForm .row .col label, .eventForm .row .col .label {
+	width: 130px;
+}
+
+.eventForm .row .col input.text, .eventForm .row .col div input.text {
+	width: 230px;
+	margin: 0 !important;
+	padding: 0 !important;
+	/* hack for IE6: negative margin */
+	margin-left: -3px;
+	padding-left: 2px
+}
+
+.eventForm .row .col div input.text {
+	/* set the margin "back" to zero inside a nested DIV */
+	margin-left: 0;
+}
+
+.eventForm .row .col_spacer {
+	width: 20px;
+}
+
+input.submit {
+	font-weight: bold;
+}
+
+.eventForm select {
+	width: 233px;
+}
+
+.eventForm .row select, .eventForm .row textarea {
+	margin: 0 !important;
+	padding: 0 !important;
+	/* hack for IE6: negative margin */
+	margin-left: -3px;
+	padding-left: 2px
+}
+
+.eventForm .row div select, .eventForm .row div textarea {
+	/* set the margin "back" to zero inside a nested DIV */
+	margin-left: 0;
+}
+
+.eventForm select:focus {
+	background-color: #E0EDF9;
+}
+
+/* --- DOJO Dijits ---------------------------------------------------------- */
+.eventForm div .dijit {
+	width: 100%;
+}
+
+.eventForm .row .col div .dijit {
+	width: auto;
+}
+
+.eventForm .dijitReset, .eventForm .dijitReset div, .eventForm table .dijitReset div {
+	margin: 0;
+	padding: 0;
+}
+
+.eventForm .dijitTextBox .dijitInputField {
+	width: 210px;
+}

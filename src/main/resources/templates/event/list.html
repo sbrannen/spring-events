@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="global/meta :: meta">
+	<title>Spring Events</title>
+</head>
+
+<body>
+	<div id="pagemargin">
+		<div th:replace="global/header :: header" />
+
+		<div id="content">
+			<table border="1" cellpadding="3" cellspacing="2">
+				<tr>
+					<th>ID</th>
+					<th>Date</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+				<tr th:each="event : ${events}">
+					<td th:text="${event.id}">1</td>
+					<td th:text="${event.eventDate}">1999-12-31</td>
+					<td th:text="${event.name}">Event</td>
+					<td th:text="${event.location}">Location</td>
+				</tr>
+			</table>
+		</div><!-- END content -->
+
+		<div class="clear"></div><br />
+		<div class="bar"></div>
+	</div><!-- END pagemargin -->
+	<div th:replace="global/footer :: footer" />
+</body>
+</html>

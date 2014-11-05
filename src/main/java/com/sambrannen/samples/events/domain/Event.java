@@ -25,6 +25,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,7 +42,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Data
-@EqualsAndHashCode(exclude = { "eventDate", "name", "description" })
+@EqualsAndHashCode(exclude = { "eventDate", "name", "location" })
 public class Event implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -46,10 +51,16 @@ public class Event implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@NotNull(message = "{errors.required}")
+	@DateTimeFormat(iso = ISO.DATE)
 	@Temporal(TemporalType.DATE)
 	private Date eventDate = new Date();
 
+	@NotNull(message = "{errors.required}")
+	@Size(min = 1, max = 30, message = "{errors.range}")
 	private String name;
-	private String description;
+
+	@Size(min = 0, max = 30, message = "{errors.range}")
+	private String location;
 
 }

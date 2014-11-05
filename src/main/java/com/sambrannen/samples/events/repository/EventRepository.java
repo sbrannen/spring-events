@@ -14,28 +14,27 @@
  * limitations under the License.
  */
 
-package com.sambrannen.samples.events;
+package com.sambrannen.samples.events.repository;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.sambrannen.samples.events.domain.Event;
 
 /**
+ * Repository API for the {@link Event} entity.
+ *
  * @author Sam Brannen
  * @since 1.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
-@WebAppConfiguration
-@IntegrationTest
-public class ApplicationTests {
+@Transactional
+@Repository
+public interface EventRepository extends JpaRepository<Event, Long> {
 
-	@Test
-	public void contextLoads() throws Exception {
-		// System.in.read();
-	}
+	@Override
+	List<Event> findAll();
 
 }

@@ -36,11 +36,11 @@ public class EventTests {
 		event.setId(99L);
 		event.setEventDate(new Date());
 		event.setName("Test Event");
-		event.setDescription("testing...");
+		event.setLocation("Unit Test");
 
 		assertEquals(99L, event.getId().longValue());
 		assertEquals("Test Event", event.getName());
-		assertEquals("testing...", event.getDescription());
+		assertEquals("Unit Test", event.getLocation());
 	}
 
 	@Test
@@ -65,7 +65,7 @@ public class EventTests {
 		event1.setId(id);
 		event1.setEventDate(new Date());
 		event1.setName("Test Event");
-		event1.setDescription("testing...");
+		event1.setLocation("Unit Test");
 		return event1;
 	}
 
@@ -74,7 +74,7 @@ public class EventTests {
 		event1.setId(99L);
 		event1.setEventDate(new Date());
 		event1.setName(name);
-		event1.setDescription("testing...");
+		event1.setLocation("Unit Test");
 		return event1;
 	}
 
