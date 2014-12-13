@@ -9,18 +9,16 @@
 		<div th:replace="global/header :: header" />
 
 		<div id="content">
-			<table border="1" cellpadding="3" cellspacing="2">
+			<table>
 				<tr>
-					<th>ID</th>
 					<th>Date</th>
-					<th>Name</th>
+					<th>Event</th>
 					<th>Location</th>
 				</tr>
 				<tr th:each="event : ${events}">
-					<td th:text="${event.id}">1</td>
-					<td th:text="${event.eventDate}">1999-12-31</td>
-					<td th:text="${event.name}">Event</td>
-					<td th:text="${event.location}">Location</td>
+					<td><a th:href="@{ '/events/' + ${event.id} }"><span th:text="${event.eventDate}">1999-12-31</span></a></td>
+					<td><a th:href="@{ '/events/' + ${event.id} }"><span th:text="${event.name}">Event</span></a></td>
+					<td><a th:href="@{ '/events/' + ${event.id} }"><span th:text="${event.location}">Location</span></a></td>
 				</tr>
 			</table>
 		</div><!-- END content -->

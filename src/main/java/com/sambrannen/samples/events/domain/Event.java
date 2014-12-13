@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2014 the original author or authors.
+ * Copyright 2010-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,36 +31,49 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Setter;
 
 /**
- * Domain entity for events.
+ * Domain entity for Spring events.
  *
  * @author Sam Brannen
  * @since 1.0
  */
 @Entity
 @Data
-@EqualsAndHashCode(exclude = { "eventDate", "name", "location" })
+@EqualsAndHashCode(exclude = "id")
 public class Event implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Setter(value = AccessLevel.PRIVATE)
 	private Long id;
 
 	@NotNull(message = "{errors.required}")
-	@DateTimeFormat(iso = ISO.DATE)
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date eventDate = new Date();
 
 	@NotNull(message = "{errors.required}")
-	@Size(min = 1, max = 30, message = "{errors.range}")
+	@Size(min = 5, max = 30, message = "{errors.range}")
 	private String name;
 
-	@Size(min = 0, max = 30, message = "{errors.range}")
+	@NotNull(message = "{errors.required}")
+	@Size(min = 5, max = 30, message = "{errors.range}")
 	private String location;
+
+
+	public Event() {
+	}
+
+	public Event(Long id) {
+		this();
+		this.id = id;
+	}
 
 }

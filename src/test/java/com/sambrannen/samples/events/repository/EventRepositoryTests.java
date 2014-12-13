@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2014 the original author or authors.
+ * Copyright 2010-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-import com.sambrannen.samples.events.Application;
 import com.sambrannen.samples.events.domain.Event;
 
 /**
@@ -37,11 +36,10 @@ import com.sambrannen.samples.events.domain.Event;
  * @author Sam Brannen
  * @since 1.0
  */
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = TestRepositoryConfig.class)
 public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringContextTests {
 
-	private static final String EVENTS_TABLES = "event";
-	private static final int INITIAL_NUM_EVENTS = 8;
+	private static final String EVENTS_TABLE = "event";
 
 	@Autowired
 	EventRepository repo;
@@ -54,7 +52,7 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 	public void findAll() {
 		List<Event> events = repo.findAll();
 		assertNotNull(events);
-		assertEquals(INITIAL_NUM_EVENTS, events.size());
+		assertTrue(events.size() > 0);
 	}
 
 	@Test
@@ -64,25 +62,24 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 	}
 
 	@Test
-	public void saveWithMinimumRequiredFields() {
-		assertNumEvents(INITIAL_NUM_EVENTS);
+	public void save() {
+		final int numRowsInTable = countNumEvents();
 
 		Event event = new Event();
 		event.setName("test event");
+		event.setLocation("test suite");
 
 		Event savedEvent = repo.save(event);
 		repo.flush();
 
 		assertNotNull(savedEvent.getId());
-		assertNumEvents(INITIAL_NUM_EVENTS + 1);
-
-		event.setId(new Long(INITIAL_NUM_EVENTS + 1));
+		assertNumEvents(numRowsInTable + 1);
 		assertEquals(event, repo.findOne(savedEvent.getId()));
 	}
 
 	@Test
 	public void update() {
-		assertNumEvents(INITIAL_NUM_EVENTS);
+		final int numRowsInTable = countNumEvents();
 
 		Event event = repo.findOne(1L);
 		assertNotNull(event);
@@ -91,25 +88,29 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 		Event updatedEvent = repo.save(event);
 		repo.flush();
 
-		assertNumEvents(INITIAL_NUM_EVENTS);
+		assertNumEvents(numRowsInTable);
 		String updatedName = jdbcTemplate.queryForObject("select name from event where id=?", String.class,
 			updatedEvent.getId());
-
 		assertEquals("updated name", updatedName);
 	}
 
 	@Test
 	public void delete() {
+		final int numRowsInTable = countNumEvents();
+
 		Event event = repo.findOne(1L);
 		assertNotNull(event);
 		repo.delete(event);
 		repo.flush();
-		assertNumEvents(INITIAL_NUM_EVENTS - 1);
+		assertNumEvents(numRowsInTable - 1);
+	}
+
+	private int countNumEvents() {
+		return countRowsInTable(EVENTS_TABLE);
 	}
 
 	private void assertNumEvents(int expectedNumRows) {
-		int numRowsInTable = countRowsInTable(EVENTS_TABLES);
-		assertEquals("Number of rows in table [" + EVENTS_TABLES + "].", expectedNumRows, numRowsInTable);
+		assertEquals("Number of rows in table [" + EVENTS_TABLE + "].", expectedNumRows, countNumEvents());
 	}
 
 }

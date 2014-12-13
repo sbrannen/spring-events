@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2014 the original author or authors.
+ * Copyright 2010-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,10 @@
 package com.sambrannen.samples.events;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Central configuration for the <em>Spring Events</em> sample application,
@@ -33,11 +29,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author Sam Brannen
  * @since 1.0
  */
-@Configuration
-@ComponentScan
-@EnableAutoConfiguration
-@EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.sambrannen.samples.events.repository")
+@SpringBootApplication
 public class Application {
 
 	@Bean

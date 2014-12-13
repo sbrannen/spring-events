@@ -32,7 +32,23 @@ a img {
 	vertical-align: middle;
 }
 
+table {
+	border: 1px #369 solid;
+	text-align: left;
+}
+
+tr {
+	border: 5px #369 solid;
+}
+
 th {
+	color: #369;
+	background-color: #F4F9FF;
+	text-align: center;
+}
+
+th, td {
+	padding: 5px;
 	white-space: nowrap;
 }
 

@@ -16,19 +16,25 @@
 
 package com.sambrannen.samples.events.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.sambrannen.samples.events.domain.Event;
 
 /**
- * Repository API for the {@link Event} entity.
+ * Context configuration for integration tests in the repository layer.
  *
  * @author Sam Brannen
  * @since 1.0
  */
-@Transactional
-@Repository
-public interface EventRepository extends JpaRepository<Event, Long> {
+@Configuration
+// @EnableAutoConfiguration
+@EnableJpaRepositories(basePackageClasses = EventRepository.class)
+@EntityScan(basePackageClasses = Event.class)
+@Import({ DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class })
+public class TestRepositoryConfig {
 }

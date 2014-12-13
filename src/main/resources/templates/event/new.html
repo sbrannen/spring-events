@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="global/meta :: meta">
+	<title>Spring Events</title>
+</head>
+
+<body>
+	<div id="pagemargin">
+		<div th:replace="global/header :: header" />
+
+		<div id="content">
+
+			<form th:object="${event}" action="" method="post">
+
+				<fieldset th:if="${#fields.hasErrors('all')}" class="error">
+					<legend>Errors in Form</legend>
+					<div th:each="e : ${#fields.detailedErrors()}" class="row error">
+						<div class="col">
+							<span th:text="${e.global}? '*' : ${e.fieldName}">The field name</span>
+							<span th:text="${e.message}">The error message</span>
+						</div>
+					</div>
+				</fieldset>
+
+				<fieldset class="eventForm">
+
+					<legend>New Event</legend>
+
+					<div class="row">
+						<div class="col">
+							<label th:for="eventDate" th:class="${#fields.hasErrors('eventDate')}? error">Date:</label>
+							<div>
+								<input type="date" th:field="*{eventDate}" maxlength="30" />
+								<p th:if="${#fields.hasErrors('eventDate')}" th:errors="*{eventDate}" class="error">error</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col">
+							<label th:for="name" th:class="${#fields.hasErrors('name')}? error">Name:</label>
+							<div>
+								<input type="text" th:field="*{name}" maxlength="30" />
+								<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">error</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col">
+							<label th:for="location" th:class="${#fields.hasErrors('location')}? error">Location:</label>
+							<div>
+								<input type="text" th:field="*{location}" maxlength="30" />
+								<p th:if="${#fields.hasErrors('location')}" th:errors="*{location}" class="error">error</p>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+
+				<div class="eventForm">
+					<div class="row">
+						<div class="col">
+							<input type="submit" class="btnsmall" name="submit" id="submit" value="&nbsp; Submit &raquo;" />
+						</div>
+					</div>
+				</div>
+
+			</form>
+
+		</div><!-- END content -->
+
+		<div class="clear"></div><br />
+		<div class="bar"></div>
+	</div><!-- END pagemargin -->
+	<div th:replace="global/footer :: footer" />
+</body>
+</html>
