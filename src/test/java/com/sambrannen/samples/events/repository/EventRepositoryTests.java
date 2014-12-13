@@ -20,9 +20,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -43,9 +40,6 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 
 	@Autowired
 	EventRepository repo;
-
-	@PersistenceContext
-	EntityManager em;
 
 
 	@Test
