@@ -49,7 +49,7 @@ public class DisplayEventsController {
 	}
 
 	@RequestMapping(method = GET)
-	public final String list(Model model) {
+	public String list(Model model) {
 		log.debug("Displaying all events.");
 		model.addAttribute("events", repository.findAll());
 		return "event/list";
