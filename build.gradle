@@ -29,12 +29,12 @@ jar {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-ext.h2Version             = "1.4.187"
-ext.lombokVersion         = "1.16.4"
-ext.springVersion         = "4.2.0.RC1"
-ext.springSecurityVersion = "4.0.1.RELEASE"
-ext.wiserVersion          = "3.1.7"
 ext.assertJVersion        = '3.1.0'
+ext.h2Version             = '1.4.187'
+ext.lombokVersion         = '1.16.4'
+ext.springVersion         = '4.2.1.BUILD-SNAPSHOT'
+ext.springSecurityVersion = '4.0.2.RELEASE'
+ext.wiserVersion          = '3.1.7'
 
 repositories {
     mavenCentral()
@@ -57,8 +57,8 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.springframework.security:spring-security-test:${springSecurityVersion}")
     testCompile("org.subethamail:subethasmtp:${wiserVersion}")
-	// testCompile("de.saly:javamail-mock2-fullmock:0.5-beta4")
     testCompile("org.assertj:assertj-core:${assertJVersion}")
+    // testCompile("de.saly:javamail-mock2-fullmock:0.5-beta4")
 }
 
 eclipse {
