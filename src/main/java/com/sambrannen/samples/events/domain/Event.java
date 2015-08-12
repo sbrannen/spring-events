@@ -17,24 +17,22 @@
 package com.sambrannen.samples.events.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  * Domain entity for Spring events.
@@ -55,9 +53,8 @@ public class Event implements Serializable {
 	private Long id;
 
 	@NotNull(message = "{errors.required}")
-	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date eventDate = new Date();
+	private LocalDate eventDate = LocalDate.now();
 
 	@NotNull(message = "{errors.required}")
 	@Size(min = 5, max = 30, message = "{errors.range}")

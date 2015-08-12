@@ -21,7 +21,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
 
 /**
- * Unit tests for the {@link Event} entity.
+ * Unit tests for the {@link Event} entity, basically just verifying that
+ * Lombok is working.
  *
  * @author Sam Brannen
  * @since 1.0

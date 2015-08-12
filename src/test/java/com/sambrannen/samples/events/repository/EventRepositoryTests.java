@@ -18,6 +18,7 @@ package com.sambrannen.samples.events.repository;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Test;
@@ -59,17 +60,21 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 	@Test
 	public void save() {
 		final int numRowsInTable = countNumEvents();
+		final LocalDate tomorrow = LocalDate.now().plusDays(1);
 
 		Event event = new Event();
 		event.setName("test event");
 		event.setLocation("test suite");
+		event.setEventDate(tomorrow);
 
 		Event savedEvent = repo.save(event);
 		repo.flush();
 
 		assertThat(savedEvent.getId()).isNotNull();
 		assertNumEvents(numRowsInTable + 1);
-		assertThat(repo.findOne(savedEvent.getId())).isEqualTo(event);
+		Event retrievedSavedEvent = repo.findOne(savedEvent.getId());
+		assertThat(retrievedSavedEvent).isEqualTo(event);
+		assertThat(retrievedSavedEvent.getEventDate()).isEqualTo(tomorrow);
 	}
 
 	@Test
