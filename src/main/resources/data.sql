@@ -6,3 +6,4 @@ insert into event (id, event_date, name, location) values (5, '2013-11-14', 'Dev
 insert into event (id, event_date, name, location) values (6, '2014-04-22', 'Spring User Group', 'Atlanta');      -- Spring Framework 4.0 to 4.1
 insert into event (id, event_date, name, location) values (7, '2014-09-10', 'SpringOne 2GX', 'Dallas');           -- Testing with Spring 4.x
 insert into event (id, event_date, name, location) values (8, '2014-11-06', 'Spring eXchange', 'London');         -- Testing with Spring: An Introduction
+insert into event (id, event_date, name, location) values (9, '2015-04-30', 'Spring I/O', 'Barcelona');           -- Testing with Spring 4.x
