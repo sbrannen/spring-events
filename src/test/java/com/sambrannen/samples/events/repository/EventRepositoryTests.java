@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2014 the original author or authors.
+ * Copyright 2010-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package com.sambrannen.samples.events.repository;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
@@ -45,14 +46,14 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 	@Test
 	public void findAll() {
 		List<Event> events = repo.findAll();
-		assertNotNull(events);
-		assertTrue(events.size() > 0);
+		assertThat(events).isNotNull();
+		assertThat(events.size()).isGreaterThan(0);
 	}
 
 	@Test
 	public void findOne() {
 		Event event = repo.findOne(1L);
-		assertNotNull(event);
+		assertThat(event).isNotNull();
 	}
 
 	@Test
@@ -66,9 +67,9 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 		Event savedEvent = repo.save(event);
 		repo.flush();
 
-		assertNotNull(savedEvent.getId());
+		assertThat(savedEvent.getId()).isNotNull();
 		assertNumEvents(numRowsInTable + 1);
-		assertEquals(event, repo.findOne(savedEvent.getId()));
+		assertThat(repo.findOne(savedEvent.getId())).isEqualTo(event);
 	}
 
 	@Test
@@ -76,7 +77,7 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 		final int numRowsInTable = countNumEvents();
 
 		Event event = repo.findOne(1L);
-		assertNotNull(event);
+		assertThat(event).isNotNull();
 		event.setName("updated name");
 
 		Event updatedEvent = repo.save(event);
@@ -85,7 +86,7 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 		assertNumEvents(numRowsInTable);
 		String updatedName = jdbcTemplate.queryForObject("select name from event where id=?", String.class,
 			updatedEvent.getId());
-		assertEquals("updated name", updatedName);
+		assertThat(updatedName).isEqualTo("updated name");
 	}
 
 	@Test
@@ -93,7 +94,7 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 		final int numRowsInTable = countNumEvents();
 
 		Event event = repo.findOne(1L);
-		assertNotNull(event);
+		assertThat(event).isNotNull();
 		repo.delete(event);
 		repo.flush();
 		assertNumEvents(numRowsInTable - 1);
@@ -104,7 +105,7 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 	}
 
 	private void assertNumEvents(int expectedNumRows) {
-		assertEquals("Number of rows in table [" + EVENTS_TABLE + "].", expectedNumRows, countNumEvents());
+		assertThat(countNumEvents()).isEqualTo(expectedNumRows);
 	}
 
 }

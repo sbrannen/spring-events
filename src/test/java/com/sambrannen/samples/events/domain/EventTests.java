@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2014 the original author or authors.
+ * Copyright 2010-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package com.sambrannen.samples.events.domain;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.Test;
 
@@ -34,9 +34,9 @@ public class EventTests {
 		event.setName("Test Event");
 		event.setLocation("Unit Test");
 
-		assertEquals(99L, event.getId().longValue());
-		assertEquals("Test Event", event.getName());
-		assertEquals("Unit Test", event.getLocation());
+		assertThat(event.getId()).isEqualTo(99L);
+		assertThat(event.getName()).isEqualTo("Test Event");
+		assertThat(event.getLocation()).isEqualTo("Unit Test");
 	}
 
 	@Test
@@ -53,13 +53,13 @@ public class EventTests {
 
 		assertEqualsAndHashCode(event3, event3);
 		assertEqualsAndHashCode(event4, event4);
-		assertNotEquals(event3, event4);
-		assertNotEquals(event3.hashCode(), event4.hashCode());
+		assertThat(event3).isNotEqualTo(event4);
+		assertThat(event3.hashCode()).isNotEqualTo(event4.hashCode());
 	}
 
 	private void assertEqualsAndHashCode(Event e1, Event e2) {
-		assertEquals(e1, e2);
-		assertEquals(e1.hashCode(), e2.hashCode());
+		assertThat(e1).isEqualTo(e2);
+		assertThat(e1.hashCode()).isEqualTo(e2.hashCode());
 	}
 
 	private Event createEvent(Long id) {
