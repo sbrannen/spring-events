@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.3.0.M3'
+        springBootVersion = '1.3.0.M4'
     }
     repositories {
         mavenCentral()
@@ -32,7 +32,7 @@ targetCompatibility = 1.8
 ext.assertJVersion         = '3.1.0'
 ext.h2Version              = '1.4.187'
 ext.lombokVersion          = '1.16.4'
-ext.springBootVersion      = '1.3.0.M3'
+ext.springBootVersion      = '1.3.0.M4'
 ext.springBootAdminVersion = '1.2.2'
 ext.springVersion          = '4.2.1.BUILD-SNAPSHOT'
 ext.springSecurityVersion  = '4.0.2.RELEASE'
