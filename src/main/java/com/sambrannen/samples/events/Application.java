@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2014 the original author or authors.
+ * Copyright 2010-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@ package com.sambrannen.samples.events;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.ResourceBundleMessageSource;
 
 /**
  * Central configuration for the <em>Spring Events</em> sample application,
@@ -31,13 +28,6 @@ import org.springframework.context.support.ResourceBundleMessageSource;
  */
 @SpringBootApplication
 public class Application {
-
-	@Bean
-	public MessageSource messageSource() {
-		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename("ValidationMessages");
-		return messageSource;
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
