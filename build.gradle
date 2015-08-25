@@ -31,6 +31,7 @@ targetCompatibility = 1.8
 
 ext.assertJVersion         = '3.1.0'
 ext.h2Version              = '1.4.187'
+ext.jacksonDateTimeVersion = '2.6.1'
 ext.lombokVersion          = '1.16.4'
 ext.springBootVersion      = '1.3.0.M4'
 ext.springBootAdminVersion = '1.2.2'
@@ -56,6 +57,7 @@ dependencies {
     // compile("de.codecentric:spring-boot-admin-client:${springBootAdminVersion}")
 
     compile("org.projectlombok:lombok:${lombokVersion}")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDateTimeVersion}")
     compile("com.h2database:h2:${h2Version}")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
