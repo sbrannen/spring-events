@@ -35,7 +35,7 @@ import com.sambrannen.samples.events.domain.Event;
  * @author Sam Brannen
  * @since 1.0
  */
-@SpringApplicationConfiguration(classes = TestRepositoryConfig.class)
+@SpringApplicationConfiguration(TestRepositoryConfig.class)
 public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringContextTests {
 
 	private static final String EVENTS_TABLE = "event";
