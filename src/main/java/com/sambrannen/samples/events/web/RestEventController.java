@@ -68,12 +68,12 @@ public class RestEventController {
 		response.setHeader("Location", newLocation);
 	}
 
-	@RequestMapping(value = "/{id}", method = GET)
+	@RequestMapping(path = "/{id}", method = GET)
 	public Event retrieveEvent(@PathVariable Long id) {
 		return repository.findOne(id);
 	}
 
-	@RequestMapping(value = "/{id}", method = DELETE)
+	@RequestMapping(path = "/{id}", method = DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteEvent(@PathVariable Long id) {
 		repository.delete(id);
