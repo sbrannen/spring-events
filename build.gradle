@@ -32,6 +32,7 @@ targetCompatibility = 1.8
 ext.assertJVersion         = '3.1.0'
 ext.h2Version              = '1.4.188'
 ext.jacksonDateTimeVersion = '2.6.1'
+ext.jsonpathVersion        = '2.0.0'
 ext.lombokVersion          = '1.16.4'
 ext.springBootVersion      = '1.3.0.M5'
 ext.springBootAdminVersion = '1.2.2'
@@ -64,6 +65,7 @@ dependencies {
     testCompile("org.springframework.security:spring-security-test:${springSecurityVersion}")
     testCompile("org.subethamail:subethasmtp:${wiserVersion}")
     testCompile("org.assertj:assertj-core:${assertJVersion}")
+    testCompile("com.jayway.jsonpath:json-path:${jsonpathVersion}")
     // testCompile("de.saly:javamail-mock2-fullmock:0.5-beta4")
 }
 
