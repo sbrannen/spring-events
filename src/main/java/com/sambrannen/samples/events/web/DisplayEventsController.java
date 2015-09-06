@@ -16,8 +16,6 @@
 
 package com.sambrannen.samples.events.web;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sambrannen.samples.events.domain.Event;
 import com.sambrannen.samples.events.repository.EventRepository;
+import com.sambrannen.samples.events.web.annotation.Get;
 
 /**
  * Spring MVC controller for displaying all {@link Event events}.
@@ -48,7 +47,7 @@ public class DisplayEventsController {
 		this.repository = repository;
 	}
 
-	@RequestMapping(method = GET)
+	@Get
 	public String list(Model model) {
 		log.debug("Displaying all events.");
 		model.addAttribute("events", repository.findAll());

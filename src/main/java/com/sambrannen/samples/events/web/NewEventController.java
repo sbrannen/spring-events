@@ -16,8 +16,6 @@
 
 package com.sambrannen.samples.events.web;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -32,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sambrannen.samples.events.domain.Event;
 import com.sambrannen.samples.events.repository.EventRepository;
+import com.sambrannen.samples.events.web.annotation.Get;
+import com.sambrannen.samples.events.web.annotation.Post;
 
 /**
  * Spring MVC controller for submitting a new {@link Event}.
@@ -59,14 +59,14 @@ public class NewEventController {
 		binder.setDisallowedFields("id");
 	}
 
-	@RequestMapping(method = GET)
+	@Get
 	public String edit(Model model) {
 		log.debug("Displaying event form.");
 		model.addAttribute(new Event());
 		return FORM_VIEW_NAME;
 	}
 
-	@RequestMapping(method = POST)
+	@Post
 	public String submit(@Valid Event event, BindingResult bindingResult) throws Exception {
 		log.debug("Submitting event form [" + event + "].");
 
