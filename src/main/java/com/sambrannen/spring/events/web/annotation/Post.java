@@ -14,23 +14,30 @@
  * limitations under the License.
  */
 
-package com.sambrannen.samples.events;
+package com.sambrannen.spring.events.web.annotation;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import org.springframework.core.annotation.AliasFor;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Central configuration for the <em>Spring Events</em> sample application,
- * powered by Spring Boot.
- *
  * @author Sam Brannen
  * @since 1.0
  */
-@SpringBootApplication
-public class Application {
+@RequestMapping(method = POST)
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface Post {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+	@AliasFor(annotation = RequestMapping.class, attribute = "path")
+	String[] value() default {};
 
 }

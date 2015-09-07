@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.sambrannen.samples.events.web;
+package com.sambrannen.spring.events.web;
 
+import static org.springframework.http.HttpStatus.*;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.*;
 
 import java.util.List;
@@ -26,15 +27,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
-import com.sambrannen.samples.events.domain.Event;
-import com.sambrannen.samples.events.repository.EventRepository;
-import com.sambrannen.samples.events.web.annotation.Delete;
-import com.sambrannen.samples.events.web.annotation.Get;
-import com.sambrannen.samples.events.web.annotation.Post;
+import com.sambrannen.spring.events.domain.Event;
+import com.sambrannen.spring.events.repository.EventRepository;
+import com.sambrannen.spring.events.web.annotation.Delete;
+import com.sambrannen.spring.events.web.annotation.Get;
+import com.sambrannen.spring.events.web.annotation.Post;
+import com.sambrannen.spring.events.web.annotation.Put;
 
 /**
  * RESTful controller for {@link Event events}.
@@ -44,13 +47,13 @@ import com.sambrannen.samples.events.web.annotation.Post;
  */
 @RestController
 @RequestMapping("/events")
-public class RestEventController {
+public class RestEventsController {
 
 	private final EventRepository repository;
 
 
 	@Autowired
-	public RestEventController(EventRepository eventRepository) {
+	public RestEventsController(EventRepository eventRepository) {
 		this.repository = eventRepository;
 	}
 
@@ -65,13 +68,19 @@ public class RestEventController {
 	}
 
 	@Post
+	@ResponseStatus(CREATED)
 	public HttpEntity<Void> createEvent(@RequestBody Event postedEvent) {
 		Event savedEvent = repository.save(postedEvent);
 
 		UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodCall(
-			on(RestEventController.class).retrieveEvent(savedEvent.getId())).build();
+			on(RestEventsController.class).retrieveEvent(savedEvent.getId())).build();
 
 		return ResponseEntity.noContent().location(uriComponents.encode().toUri()).build();
+	}
+
+	@Put("/{id}")
+	public void updateEvent(@RequestBody Event updatedEvent) {
+		repository.save(updatedEvent);
 	}
 
 	@Delete("/{id}")

@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.sambrannen.samples.events.domain;
+package com.sambrannen.spring.events.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.Test;
+
+import com.sambrannen.spring.events.domain.Event;
 
 /**
  * Unit tests for the {@link Event} entity, basically just verifying that

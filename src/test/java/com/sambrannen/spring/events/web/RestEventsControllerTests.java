@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sambrannen.samples.events.web;
+package com.sambrannen.spring.events.web;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.springframework.http.MediaType.*;
@@ -25,7 +25,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -34,10 +33,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.sambrannen.samples.events.Application;
+import com.sambrannen.spring.events.Application;
+import com.sambrannen.spring.events.web.RestEventsController;
 
 /**
- * Integration tests for the {@link RestEventController}.
+ * Integration tests for the {@link RestEventsController}.
  *
  * @author Sam Brannen
  * @since 1.0
@@ -45,7 +45,7 @@ import com.sambrannen.samples.events.Application;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
 @WebAppConfiguration
-public class RestEventControllerTests {
+public class RestEventsControllerTests {
 
 	@Autowired
 	WebApplicationContext wac;

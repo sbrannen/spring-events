@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2015 the original author or authors.
+ * Copyright 2010-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sambrannen.samples.events.web.annotation;
+package com.sambrannen.spring.events.web.annotation;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -33,12 +33,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Sam Brannen
  * @since 1.0
  */
-@RequestMapping(method = POST)
-@ResponseStatus(HttpStatus.CREATED)
+@RequestMapping(method = PUT)
+@ResponseStatus(HttpStatus.NO_CONTENT)
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Post {
+public @interface Put {
 
 	@AliasFor(annotation = RequestMapping.class, attribute = "path")
 	String[] value() default {};

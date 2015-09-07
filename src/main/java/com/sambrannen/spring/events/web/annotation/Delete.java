@@ -14,28 +14,33 @@
  * limitations under the License.
  */
 
-package com.sambrannen.samples.events.web;
+package com.sambrannen.spring.events.web.annotation;
 
-import org.springframework.dao.DataIntegrityViolationException;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import org.springframework.core.annotation.AliasFor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Global <em>controller advice</em>.
- *
  * @author Sam Brannen
  * @since 1.0
- * @see ControllerAdvice
  */
-@ControllerAdvice
-public class GlobalControllerAdvice {
+@RequestMapping(method = DELETE)
+@ResponseStatus(HttpStatus.NO_CONTENT)
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface Delete {
 
-	@ResponseStatus(HttpStatus.CONFLICT)
-	@ExceptionHandler(DataIntegrityViolationException.class)
-	public void handleDatabaseConstraintViolation() {
-		/* no-op */
-	}
+	@AliasFor(annotation = RequestMapping.class, attribute = "path")
+	String[] value() default {};
 
 }

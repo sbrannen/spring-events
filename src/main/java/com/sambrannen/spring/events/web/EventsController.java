@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2014 the original author or authors.
+ * Copyright 2010-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sambrannen.samples.events.web;
+package com.sambrannen.spring.events.web;
 
 import javax.validation.Valid;
 
@@ -24,56 +24,56 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sambrannen.samples.events.domain.Event;
-import com.sambrannen.samples.events.repository.EventRepository;
-import com.sambrannen.samples.events.web.annotation.Get;
-import com.sambrannen.samples.events.web.annotation.Post;
+import com.sambrannen.spring.events.domain.Event;
+import com.sambrannen.spring.events.repository.EventRepository;
+import com.sambrannen.spring.events.web.annotation.Get;
+import com.sambrannen.spring.events.web.annotation.Post;
 
 /**
- * Spring MVC controller for submitting a new {@link Event}.
+ * Spring MVC controller for displaying and creating {@link Event events}.
  *
  * @author Sam Brannen
  * @since 1.0
  */
 @Controller
-@RequestMapping("/new*")
-public class NewEventController {
+public class EventsController {
 
-	private static final String FORM_VIEW_NAME = "event/new";
-	private static final Log log = LogFactory.getLog(NewEventController.class);
+	private static final String LIST_VIEW_NAME = "event/list";
+	private static final String FORM_VIEW_NAME = "event/form";
+
+	private static final Log log = LogFactory.getLog(EventsController.class);
 
 	private final EventRepository repository;
 
 
 	@Autowired
-	public NewEventController(EventRepository repository) {
+	public EventsController(EventRepository repository) {
 		this.repository = repository;
 	}
 
-	@InitBinder
-	public void configureBinding(WebDataBinder binder) {
-		binder.setDisallowedFields("id");
+	@Get("/")
+	public String list(Model model) {
+		log.debug("Displaying all events");
+		model.addAttribute("events", repository.findAll());
+		return LIST_VIEW_NAME;
 	}
 
-	@Get
+	@Get("/form")
 	public String edit(Model model) {
-		log.debug("Displaying event form.");
+		log.debug("Displaying event form");
 		model.addAttribute(new Event());
 		return FORM_VIEW_NAME;
 	}
 
-	@Post
-	public String submit(@Valid Event event, BindingResult bindingResult) throws Exception {
-		log.debug("Submitting event form [" + event + "].");
-
+	@Post("/form")
+	public String submit(@Valid Event event, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
+			log.debug("Redisplaying event form");
 			return FORM_VIEW_NAME;
 		}
-		// else
+
+		log.debug("Submitting event form: " + event);
 		repository.save(event);
 		return "redirect:/";
 	}

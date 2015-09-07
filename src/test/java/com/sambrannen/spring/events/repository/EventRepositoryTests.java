@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sambrannen.samples.events.repository;
+package com.sambrannen.spring.events.repository;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -22,12 +22,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-import com.sambrannen.samples.events.domain.Event;
+import com.sambrannen.spring.events.domain.Event;
+import com.sambrannen.spring.events.repository.EventRepository;
 
 /**
  * Integration tests for the {@link EventRepository}.

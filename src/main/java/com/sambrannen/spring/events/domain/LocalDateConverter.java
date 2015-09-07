@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sambrannen.samples.events.domain;
+package com.sambrannen.spring.events.domain;
 
 import java.sql.Date;
 import java.time.LocalDate;
