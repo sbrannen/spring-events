@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 the original author or authors.
+ * Copyright 2002-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,47 @@
  * limitations under the License.
  */
 
-package com.sambrannen.spring.events.web.annotation;
+package org.springframework.composed.web.rest;
 
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.*;
+
+import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.MediaType.*;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * @author Sam Brannen
  * @since 1.0
  */
-@RequestMapping(method = GET)
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
+@RequestMapping(method = POST, consumes = APPLICATION_JSON_VALUE)
+@ResponseStatus(CREATED)
+@Target(METHOD)
+@Retention(RUNTIME)
 @Documented
-public @interface Get {
+public @interface PostJson {
+
+	@AliasFor(annotation = RequestMapping.class, attribute = "name")
+	String name() default "";
 
 	@AliasFor(annotation = RequestMapping.class, attribute = "path")
 	String[] value() default {};
+
+	@AliasFor(annotation = RequestMapping.class, attribute = "path")
+	String[] path() default {};
+
+	@AliasFor(annotation = RequestMapping.class, attribute = "params")
+	String[] params() default {};
+
+	@AliasFor(annotation = RequestMapping.class, attribute = "headers")
+	String[] headers() default {};
 
 }

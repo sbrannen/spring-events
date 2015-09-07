@@ -20,15 +20,16 @@ import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.composed.web.Get;
+import org.springframework.composed.web.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import com.sambrannen.spring.events.domain.Event;
 import com.sambrannen.spring.events.repository.EventRepository;
-import com.sambrannen.spring.events.web.annotation.Get;
-import com.sambrannen.spring.events.web.annotation.Post;
 
 /**
  * Spring MVC controller for displaying and creating {@link Event events}.

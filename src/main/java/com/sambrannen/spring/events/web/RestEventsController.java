@@ -16,28 +16,26 @@
 
 package com.sambrannen.spring.events.web;
 
-import static org.springframework.http.HttpStatus.*;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.*;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.composed.web.rest.DeleteJson;
+import org.springframework.composed.web.rest.GetJson;
+import org.springframework.composed.web.rest.PostJson;
+import org.springframework.composed.web.rest.PutJson;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
 import com.sambrannen.spring.events.domain.Event;
 import com.sambrannen.spring.events.repository.EventRepository;
-import com.sambrannen.spring.events.web.annotation.Delete;
-import com.sambrannen.spring.events.web.annotation.Get;
-import com.sambrannen.spring.events.web.annotation.Post;
-import com.sambrannen.spring.events.web.annotation.Put;
 
 /**
  * RESTful controller for {@link Event events}.
@@ -57,18 +55,17 @@ public class RestEventsController {
 		this.repository = eventRepository;
 	}
 
-	@Get
+	@GetJson
 	public List<Event> retrieveAllEvents() {
 		return repository.findAll();
 	}
 
-	@Get("/{id}")
+	@GetJson("/{id}")
 	public Event retrieveEvent(@PathVariable Long id) {
 		return repository.findOne(id);
 	}
 
-	@Post
-	@ResponseStatus(CREATED)
+	@PostJson
 	public HttpEntity<Void> createEvent(@RequestBody Event postedEvent) {
 		Event savedEvent = repository.save(postedEvent);
 
@@ -78,12 +75,12 @@ public class RestEventsController {
 		return ResponseEntity.noContent().location(uriComponents.encode().toUri()).build();
 	}
 
-	@Put("/{id}")
+	@PutJson("/{id}")
 	public void updateEvent(@RequestBody Event updatedEvent) {
 		repository.save(updatedEvent);
 	}
 
-	@Delete("/{id}")
+	@DeleteJson("/{id}")
 	public void deleteEvent(@PathVariable Long id) {
 		repository.delete(id);
 	}

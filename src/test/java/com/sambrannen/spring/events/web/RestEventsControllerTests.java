@@ -34,7 +34,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.sambrannen.spring.events.Application;
-import com.sambrannen.spring.events.web.RestEventsController;
 
 /**
  * Integration tests for the {@link RestEventsController}.
