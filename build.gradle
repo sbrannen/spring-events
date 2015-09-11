@@ -66,6 +66,7 @@ dependencies {
     testCompile("org.subethamail:subethasmtp:${wiserVersion}")
     testCompile("org.assertj:assertj-core:${assertJVersion}")
     testCompile("com.jayway.jsonpath:json-path:${jsonpathVersion}")
+    testCompile('org.testng:testng:6.9.6')
     // testCompile("de.saly:javamail-mock2-fullmock:0.5-beta4")
 }
 
