@@ -106,5 +106,4 @@ public class EventTests {
 		event.setLocation("Unit Test");
 		return event;
 	}
-
 }
