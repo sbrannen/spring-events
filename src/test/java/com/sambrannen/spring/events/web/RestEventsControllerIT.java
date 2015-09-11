@@ -44,7 +44,7 @@ import com.sambrannen.spring.events.Application;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
 @WebAppConfiguration
-public class RestEventsControllerTests {
+public class RestEventsControllerIT {
 
 	@Autowired
 	WebApplicationContext wac;

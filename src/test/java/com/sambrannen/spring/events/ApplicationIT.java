@@ -29,7 +29,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
 @WebIntegrationTest
-public class ApplicationTests {
+public class ApplicationIT {
 
 	@Test
 	public void contextLoads() throws Exception {

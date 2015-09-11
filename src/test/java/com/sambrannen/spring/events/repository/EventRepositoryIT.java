@@ -36,7 +36,7 @@ import com.sambrannen.spring.events.repository.EventRepository;
  * @since 1.0
  */
 @SpringApplicationConfiguration(TestRepositoryConfig.class)
-public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringContextTests {
+public class EventRepositoryIT extends AbstractTransactionalJUnit4SpringContextTests {
 
 	private static final String EVENTS_TABLE = "event";
 

@@ -93,3 +93,11 @@ configurations.all {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.5'
 }
+
+test {
+    include '**/*Tests.java'
+}
+
+task integrationTest(type:Test,dependsOn:"test") << {
+    include '**/*IT.java'
+}
