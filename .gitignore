@@ -7,3 +7,5 @@ gradle-app.setting
 /.settings/
 /.project
 /bin/
+.idea
+spring-events.iml
