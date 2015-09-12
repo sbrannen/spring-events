@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
  * @author Nicolas Frankel
  * @since 1.0
  */
-public class TestNgEventTests {
+public class TestNgEventTest {
 
 	@Test
 	public void lombokShouldSetCorrectly() {
