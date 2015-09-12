@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.composed.web.rest;
+package org.springframework.composed.web.rest.xml;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
@@ -35,12 +35,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Sam Brannen
  * @since 1.0
  */
-@RequestMapping(method = POST, consumes = APPLICATION_JSON_VALUE)
-@ResponseStatus(CREATED)
+@RequestMapping(method = PUT, consumes = APPLICATION_XML_VALUE)
+@ResponseStatus(NO_CONTENT)
 @Target(METHOD)
 @Retention(RUNTIME)
 @Documented
-public @interface PostJson {
+public @interface PutXml {
 
 	@AliasFor(annotation = RequestMapping.class, attribute = "name")
 	String name() default "";

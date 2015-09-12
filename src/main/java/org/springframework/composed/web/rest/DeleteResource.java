@@ -16,22 +16,21 @@
 
 package org.springframework.composed.web.rest;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
-
-import static org.springframework.http.HttpStatus.*;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import org.springframework.core.annotation.AliasFor;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import org.springframework.core.annotation.AliasFor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 
 /**
- * @author Sam Brannen
+ * @author Kazuki Shimizu
  * @since 1.0
  */
 @RequestMapping(method = DELETE)
@@ -39,7 +38,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Target(METHOD)
 @Retention(RUNTIME)
 @Documented
-public @interface DeleteJson {
+public @interface DeleteResource {
 
 	@AliasFor(annotation = RequestMapping.class, attribute = "name")
 	String name() default "";

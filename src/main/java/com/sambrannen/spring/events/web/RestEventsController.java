@@ -21,10 +21,10 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.composed.web.rest.DeleteJson;
-import org.springframework.composed.web.rest.GetJson;
-import org.springframework.composed.web.rest.PostJson;
-import org.springframework.composed.web.rest.PutJson;
+import org.springframework.composed.web.rest.DeleteResource;
+import org.springframework.composed.web.rest.json.GetJson;
+import org.springframework.composed.web.rest.json.PostJson;
+import org.springframework.composed.web.rest.json.PutJson;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -80,7 +80,7 @@ public class RestEventsController {
 		repository.save(updatedEvent);
 	}
 
-	@DeleteJson("/{id}")
+	@DeleteResource("/{id}")
 	public void deleteEvent(@PathVariable Long id) {
 		repository.delete(id);
 	}
