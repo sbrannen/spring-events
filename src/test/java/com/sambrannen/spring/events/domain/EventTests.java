@@ -16,10 +16,10 @@
 
 package com.sambrannen.spring.events.domain;
 
-import static org.assertj.core.api.StrictAssertions.assertThat;
+import static org.assertj.core.api.StrictAssertions.*;
+import static org.springframework.test.util.ReflectionTestUtils.*;
 
 import org.junit.Test;
-import org.springframework.test.util.ReflectionTestUtils;
 
 /**
  * Unit tests for the {@link Event} entity, basically just verifying that
@@ -36,16 +36,16 @@ public class EventTests {
 		event.setName("Test Event");
 		event.setLocation("Unit Test");
 
-		assertThat(ReflectionTestUtils.getField(event, "id")).isEqualTo(99L);
-		assertThat(ReflectionTestUtils.getField(event, "name")).isEqualTo("Test Event");
-		assertThat(ReflectionTestUtils.getField(event, "location")).isEqualTo("Unit Test");
+		assertThat(getField(event, "id")).isEqualTo(99L);
+		assertThat(getField(event, "name")).isEqualTo("Test Event");
+		assertThat(getField(event, "location")).isEqualTo("Unit Test");
 	}
 
 	@Test
 	public void lombokShouldGetCorrectly() {
 		Event event = new Event(99L);
-		ReflectionTestUtils.setField(event, "name", "Test Event");
-		ReflectionTestUtils.setField(event, "location", "Unit Test");
+		setField(event, "name", "Test Event");
+		setField(event, "location", "Unit Test");
 
 		assertThat(event.getId()).isEqualTo(99L);
 		assertThat(event.getName()).isEqualTo("Test Event");
