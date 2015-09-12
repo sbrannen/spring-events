@@ -19,6 +19,8 @@ package com.sambrannen.spring.events;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.sambrannen.spring.events.web.EventsController;
+
 /**
  * Central configuration for the <em>Spring Events</em> sample application,
  * powered by Spring Boot.
@@ -26,7 +28,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Sam Brannen
  * @since 1.0
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackageClasses = EventsController.class)
 public class Application {
 
 	public static void main(String[] args) {
