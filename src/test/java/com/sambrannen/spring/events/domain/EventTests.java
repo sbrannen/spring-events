@@ -16,6 +16,7 @@
 
 package com.sambrannen.spring.events.domain;
 
+import static com.sambrannen.spring.events.domain.EventTestUtils.*;
 import static org.assertj.core.api.StrictAssertions.*;
 import static org.springframework.test.util.ReflectionTestUtils.*;
 
@@ -92,18 +93,4 @@ public class EventTests {
 		assertThat(event3.hashCode()).isNotEqualTo(event4.hashCode());
 	}
 
-	private Event createEvent(Long id) {
-		return createEvent(id, "Test Event");
-	}
-
-	private Event createEvent(String name) {
-		return createEvent(99L, name);
-	}
-
-	private Event createEvent(Long id, String name) {
-		Event event = new Event(id);
-		event.setName(name);
-		event.setLocation("Unit Test");
-		return event;
-	}
 }
