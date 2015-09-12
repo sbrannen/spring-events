@@ -16,16 +16,16 @@
 
 package com.sambrannen.spring.events.domain;
 
-import org.assertj.core.api.StrictAssertions;
-import org.springframework.test.util.ReflectionTestUtils;
+import static org.assertj.core.api.StrictAssertions.*;
+import static org.springframework.test.util.ReflectionTestUtils.*;
+
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 /**
- * Copy of {@link EventTests} that replaces JUnit by TestNG.
+ * Copy of {@link EventTests} that replaces JUnit with TestNG.
  *
  * @author Sam Brannen
+ * @author Nicolas Frankel
  * @since 1.0
  */
 public class TestNgEventTests {
@@ -36,16 +36,16 @@ public class TestNgEventTests {
 		event.setName("Test Event");
 		event.setLocation("Unit Test");
 
-		StrictAssertions.assertThat(ReflectionTestUtils.getField(event, "id")).isEqualTo(99L);
-		StrictAssertions.assertThat(ReflectionTestUtils.getField(event, "name")).isEqualTo("Test Event");
-		StrictAssertions.assertThat(ReflectionTestUtils.getField(event, "location")).isEqualTo("Unit Test");
+		assertThat(getField(event, "id")).isEqualTo(99L);
+		assertThat(getField(event, "name")).isEqualTo("Test Event");
+		assertThat(getField(event, "location")).isEqualTo("Unit Test");
 	}
 
 	@Test
 	public void lombokShouldGetCorrectly() {
 		Event event = new Event(99L);
-		ReflectionTestUtils.setField(event, "name", "Test Event");
-		ReflectionTestUtils.setField(event, "location", "Unit Test");
+		setField(event, "name", "Test Event");
+		setField(event, "location", "Unit Test");
 
 		assertThat(event.getId()).isEqualTo(99L);
 		assertThat(event.getName()).isEqualTo("Test Event");
@@ -83,7 +83,7 @@ public class TestNgEventTests {
 	}
 
 	@Test
-	public void eventShouldNotHaveSameHashCodeWithDifferentIdButSameName() {
+	public void eventShouldNotHaveSameHashCodeWithSameIdButDifferentName() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 

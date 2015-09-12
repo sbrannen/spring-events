@@ -83,7 +83,7 @@ public class EventTests {
 	}
 
 	@Test
-	public void eventShouldNotHaveSameHashCodeWithDifferentIdButSameName() {
+	public void eventShouldNotHaveSameHashCodeWithSameIdButDifferentName() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 
