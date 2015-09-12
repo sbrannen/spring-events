@@ -22,7 +22,8 @@ import static org.springframework.test.util.ReflectionTestUtils.*;
 import org.testng.annotations.Test;
 
 /**
- * Copy of {@link EventTests} that replaces JUnit with TestNG.
+ * Copy of {@link EventTests} that replaces JUnit with TestNG and focuses
+ * on testing one feature per test method.
  *
  * @author Sam Brannen
  * @author Nicolas Frankel
