@@ -1,75 +1,91 @@
+/*
+ * Copyright 2010-2015 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.sambrannen.spring.events;
+
+import static org.assertj.core.api.StrictAssertions.*;
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.web.context.WebApplicationContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import com.google.inject.Inject;
+
 import com.sambrannen.spring.events.domain.Event;
 import com.sambrannen.spring.events.repository.EventRepository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.hamcrest.core.Is.isA;
-import static org.hamcrest.core.StringStartsWith.startsWith;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-
+/**
+ * TestNG-based scenario tests for the Spring Events application.
+ *
+ * @author Nicolas Frankel
+ * @author Sam Brannen
+ * @since 1.0
+ */
 @SpringApplicationConfiguration(Application.class)
-@WebIntegrationTest
+@WebAppConfiguration
 public class SimpleTestNgScenarioIT extends AbstractTestNGSpringContextTests {
 
-    private MockMvc mockMvc;
+	@Autowired
+	WebApplicationContext wac;
 
-    @Autowired
-    private EventRepository repository;
+	MockMvc mockMvc;
 
-    @BeforeClass
-    protected void setUpBeforeClass() {
-        DefaultMockMvcBuilder mockMvcBuilder= webAppContextSetup((WebApplicationContext) applicationContext);
-        mockMvc = mockMvcBuilder.build();
-    }
+	@Autowired
+	EventRepository repository;
 
-    @Test
-    public void shouldDisplayNineItemsInitially() throws Exception {
-        MockHttpServletRequestBuilder getList = get("/");
-        mockMvc.perform(getList)
-            .andExpect(view().name("event/list"))
-            .andExpect(model().attribute("events", hasSize(9)));
-    }
 
-    @Test(dependsOnMethods = "shouldDisplayNineItemsInitially")
-    public void shouldDisplayAddForm() throws Exception {
-        MockHttpServletRequestBuilder getList = get("/form");
-        mockMvc.perform(getList)
-            .andExpect(view().name("event/form"))
-            .andExpect(model().attribute("event", isA(Event.class)));
-    }
+	@BeforeClass
+	protected void setUpBeforeClass() {
+		mockMvc = webAppContextSetup(wac).build();
+	}
 
-    @Test(dependsOnMethods = "shouldDisplayAddForm")
-    public void shouldAddNewEvent() throws Exception {
-        DefaultMockMvcBuilder mockMvcBuilder= webAppContextSetup((WebApplicationContext) applicationContext);
-        MockMvc mockMvc = mockMvcBuilder.build();
-        MockHttpServletRequestBuilder postForm = post("/form").param("name", "foobar").param("location", "bazqux");
-        mockMvc.perform(postForm)
-            .andExpect(view().name(startsWith("redirect:")));
-        assertThat(repository.count()).isEqualTo(10);
-    }
+	@Test
+	public void shouldDisplayNineItemsInitially() throws Exception {
+		mockMvc.perform(get("/"))
+			.andExpect(view().name("event/list"))
+			.andExpect(model().attribute("events", hasSize(9)));
+	}
 
-    @Test(dependsOnMethods = "shouldAddNewEvent")
-    public void shouldDisplayTenItemsInTheEnd() throws Exception {
-        MockHttpServletRequestBuilder getList = get("/");
-        mockMvc.perform(getList)
-            .andExpect(view().name("event/list"))
-            .andExpect(model().attribute("events", hasSize(10)));
-    }
+	@Test(dependsOnMethods = "shouldDisplayNineItemsInitially")
+	public void shouldDisplayEventForm() throws Exception {
+		mockMvc.perform(get("/form"))
+			.andExpect(view().name("event/form"))
+			.andExpect(model().attribute("event", isA(Event.class)));
+	}
+
+	@Test(dependsOnMethods = "shouldDisplayEventForm")
+	public void shouldAddNewEvent() throws Exception {
+		mockMvc.perform(post("/form").param("name", "THE Event").param("location", "Earth"))
+			.andExpect(redirectedUrl("/"));
+
+		assertThat(repository.count()).isEqualTo(10);
+	}
+
+	@Test(dependsOnMethods = "shouldAddNewEvent")
+	public void shouldDisplayTenItemsInTheEnd() throws Exception {
+		mockMvc.perform(get("/"))
+			.andExpect(view().name("event/list"))
+			.andExpect(model().attribute("events", hasSize(10)));
+	}
+
 }
