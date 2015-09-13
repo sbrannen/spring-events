@@ -22,15 +22,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.sambrannen.spring.events.Application;
@@ -44,6 +45,7 @@ import com.sambrannen.spring.events.Application;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
 @WebAppConfiguration
+@Transactional
 public class RestEventsControllerIT {
 
 	@Autowired
@@ -55,7 +57,6 @@ public class RestEventsControllerIT {
 	@Before
 	public void setUpMockMvc() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac)
-			.alwaysExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
 			// .alwaysDo(print(System.err))
 			.build();
 	}
@@ -76,7 +77,9 @@ public class RestEventsControllerIT {
 
 	@Test
 	public void retrieveAllEvents() throws Exception {
+		// curl -H "Accept:application/json" http://localhost:8080/events | json_pp
 		mockMvc.perform(get("/events").accept(APPLICATION_JSON))//
+			.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))//
 			.andExpect(jsonPath("$[8]").exists())//
 			.andExpect(jsonPath("$[?(@.name =~ /Spring I\\/O/)].location",
 					hasItems("Madrid", "Barcelona")))//
@@ -85,7 +88,9 @@ public class RestEventsControllerIT {
 
 	@Test
 	public void retrieveEvent() throws Exception {
+		// curl -H "Accept:application/json" http://localhost:8080/events/9 | json_pp
 		mockMvc.perform(get("/events/{id}", 9).accept(APPLICATION_JSON))//
+			.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))//
 			.andExpect(jsonPath("$.id", is(9)))//
 			.andExpect(jsonPath("$.eventDate", is("2015-04-30")))//
 			.andExpect(jsonPath("$.name", is("Spring I/O")))//
@@ -93,19 +98,35 @@ public class RestEventsControllerIT {
 		;
 	}
 
-	@Ignore("Implement")
 	@Test
-	public void createEvent() {
+	@WithMockUser(roles = "ADMIN")
+	public void createEvent() throws Exception {
+		// curl -u admin:test -i -X POST -H "Content-Type:application/json" http://localhost:8080/events/ -d '{"name": "Spring!", "location": "Command Line"}'
+		mockMvc.perform(
+			post("/events/").contentType(APPLICATION_JSON)
+				.content("{\"name\": \"Spring!\", \"location\": \"Integration Test\"}"))//
+			.andExpect(status().isCreated())//
+		;
 	}
 
-	@Ignore("Implement")
 	@Test
-	public void updateEvent() {
+	@WithMockUser(roles = "ADMIN")
+	public void updateEvent() throws Exception {
+		// curl -u admin:test -i -X PUT -H "Content-Type:application/json" http://localhost:8080/events/9 -d '{"name": "Edited", "location": "Command Line"}'
+		mockMvc.perform(
+			put("/events/{id}", 9).contentType(APPLICATION_JSON)
+				.content("{\"name\": \"Edited\", \"location\": \"Integration Test\"}"))//
+			.andExpect(status().isNoContent())//
+		;
 	}
 
-	@Ignore("Implement")
 	@Test
-	public void deleteEvent() {
+	@WithMockUser(roles = "ADMIN")
+	public void deleteEvent() throws Exception {
+		// curl -u admin:test -i -X DELETE http://localhost:8080/events/9
+		mockMvc.perform(delete("/events/{id}", 9))//
+			.andExpect(status().isNoContent())//
+		;
 	}
 
 }

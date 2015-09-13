@@ -71,7 +71,7 @@ public class RestEventsController {
 		UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodCall(
 			on(RestEventsController.class).retrieveEvent(savedEvent.getId())).build();
 
-		return ResponseEntity.noContent().location(uriComponents.encode().toUri()).build();
+		return ResponseEntity.created(uriComponents.encode().toUri()).build();
 	}
 
 	@PutJson("/{id}")

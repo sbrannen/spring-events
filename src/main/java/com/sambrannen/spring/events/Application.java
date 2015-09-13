@@ -18,6 +18,7 @@ package com.sambrannen.spring.events;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import com.sambrannen.spring.events.service.EventService;
 import com.sambrannen.spring.events.web.EventsController;
@@ -30,6 +31,7 @@ import com.sambrannen.spring.events.web.EventsController;
  * @since 1.0
  */
 @SpringBootApplication(scanBasePackageClasses = { EventService.class, EventsController.class })
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class Application {
 
 	public static void main(String[] args) {

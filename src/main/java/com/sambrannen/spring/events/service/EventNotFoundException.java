@@ -16,24 +16,29 @@
 
 package com.sambrannen.spring.events.service;
 
-import java.util.List;
+import static org.springframework.http.HttpStatus.*;
 
-import com.sambrannen.spring.events.domain.Event;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Service API for the {@link Event} entity.
+ * Thrown to signal that an event could not be found for a given set of
+ * search criteria.
  *
  * @author Sam Brannen
  * @since 1.0
  */
-public interface EventService {
+@ResponseStatus(NOT_FOUND)
+public class EventNotFoundException extends RuntimeException {
 
-	List<Event> findAll();
+	private static final long serialVersionUID = -2411738770351557081L;
 
-	Event findById(Long id) throws EventNotFoundException;
 
-	Event save(Event event);
+	public EventNotFoundException(String message) {
+		super(message);
+	}
 
-	void deleteById(Long id);
+	public EventNotFoundException(String message, Throwable cause) {
+		super(message, cause);
+	}
 
 }

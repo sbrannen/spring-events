@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.composed.stereotype.TransactionalService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sambrannen.spring.events.domain.Event;
@@ -50,15 +51,21 @@ public class StandardEventService implements EventService {
 
 	@Override
 	public Event findById(Long id) {
-		return repository.findOne(id);
+		Event event = repository.findOne(id);
+		if (event == null) {
+			throw new EventNotFoundException("Could not find Event with ID [" + id + "]");
+		}
+		return event;
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Transactional(readOnly = false)
 	@Override
 	public Event save(Event event) {
 		return repository.save(event);
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Transactional(readOnly = false)
 	@Override
 	public void deleteById(Long id) {

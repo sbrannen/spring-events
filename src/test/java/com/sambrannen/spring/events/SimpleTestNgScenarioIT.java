@@ -24,6 +24,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -42,6 +45,7 @@ import com.sambrannen.spring.events.repository.EventRepository;
  * @since 1.0
  */
 @SpringApplicationConfiguration(Application.class)
+@TestExecutionListeners(WithSecurityContextTestExecutionListener.class)
 @WebAppConfiguration
 public class SimpleTestNgScenarioIT extends AbstractTestNGSpringContextTests {
 
@@ -74,6 +78,7 @@ public class SimpleTestNgScenarioIT extends AbstractTestNGSpringContextTests {
 	}
 
 	@Test(dependsOnMethods = "shouldDisplayEventForm")
+	@WithMockUser(roles = "ADMIN")
 	public void shouldAddNewEvent() throws Exception {
 		mockMvc.perform(post("/form").param("name", "THE Event").param("location", "Earth"))
 			.andExpect(redirectedUrl("/"));
