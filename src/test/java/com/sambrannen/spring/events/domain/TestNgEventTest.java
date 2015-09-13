@@ -65,7 +65,7 @@ public class TestNgEventTest {
 	}
 
 	@Test
-	public void eventShouldShouldNotBeEqualWithSameIdButDifferentName() {
+	public void eventShouldNotBeEqualWithSameIdButDifferentName() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 
