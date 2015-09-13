@@ -35,7 +35,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.util.UriComponents;
 
 import com.sambrannen.spring.events.domain.Event;
-import com.sambrannen.spring.events.repository.EventRepository;
+import com.sambrannen.spring.events.service.EventService;
 
 /**
  * RESTful controller for {@link Event events}.
@@ -47,27 +47,26 @@ import com.sambrannen.spring.events.repository.EventRepository;
 @RequestMapping("/events")
 public class RestEventsController {
 
-	private final EventRepository repository;
-
+	private final EventService service;
 
 	@Autowired
-	public RestEventsController(EventRepository eventRepository) {
-		this.repository = eventRepository;
+	public RestEventsController(EventService service) {
+		this.service = service;
 	}
 
 	@GetJson
 	public List<Event> retrieveAllEvents() {
-		return repository.findAll();
+		return service.findAll();
 	}
 
 	@GetJson("/{id}")
 	public Event retrieveEvent(@PathVariable Long id) {
-		return repository.findOne(id);
+		return service.findById(id);
 	}
 
 	@PostJson
 	public HttpEntity<Void> createEvent(@RequestBody Event postedEvent) {
-		Event savedEvent = repository.save(postedEvent);
+		Event savedEvent = service.save(postedEvent);
 
 		UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodCall(
 			on(RestEventsController.class).retrieveEvent(savedEvent.getId())).build();
@@ -77,12 +76,12 @@ public class RestEventsController {
 
 	@PutJson("/{id}")
 	public void updateEvent(@RequestBody Event updatedEvent) {
-		repository.save(updatedEvent);
+		service.save(updatedEvent);
 	}
 
 	@DeleteResource("/{id}")
 	public void deleteEvent(@PathVariable Long id) {
-		repository.delete(id);
+		service.deleteById(id);
 	}
 
 }

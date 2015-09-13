@@ -19,6 +19,7 @@ package com.sambrannen.spring.events;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.sambrannen.spring.events.service.EventService;
 import com.sambrannen.spring.events.web.EventsController;
 
 /**
@@ -28,7 +29,7 @@ import com.sambrannen.spring.events.web.EventsController;
  * @author Sam Brannen
  * @since 1.0
  */
-@SpringBootApplication(scanBasePackageClasses = EventsController.class)
+@SpringBootApplication(scanBasePackageClasses = { EventService.class, EventsController.class })
 public class Application {
 
 	public static void main(String[] args) {

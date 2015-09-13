@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 the original author or authors.
+ * Copyright 2002-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,26 @@
  * limitations under the License.
  */
 
-package com.sambrannen.spring.events.repository;
+package com.sambrannen.spring.events.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
 import com.sambrannen.spring.events.domain.Event;
 
 /**
- * Repository API for the {@link Event} entity.
+ * Service API for the {@link Event} entity.
  *
  * @author Sam Brannen
  * @since 1.0
  */
-public interface EventRepository extends JpaRepository<Event, Long> {
+public interface EventService {
+
+	List<Event> findAll();
+
+	Event findById(Long id);
+
+	Event save(Event event);
+
+	void deleteById(Long id);
+
 }

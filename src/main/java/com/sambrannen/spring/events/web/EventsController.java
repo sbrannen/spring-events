@@ -29,7 +29,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import com.sambrannen.spring.events.domain.Event;
-import com.sambrannen.spring.events.repository.EventRepository;
+import com.sambrannen.spring.events.service.EventService;
 
 /**
  * Spring MVC controller for displaying and creating {@link Event events}.
@@ -45,18 +45,17 @@ public class EventsController {
 
 	private static final Log log = LogFactory.getLog(EventsController.class);
 
-	private final EventRepository repository;
-
+	private final EventService service;
 
 	@Autowired
-	public EventsController(EventRepository repository) {
-		this.repository = repository;
+	public EventsController(EventService service) {
+		this.service = service;
 	}
 
 	@Get("/")
 	public String list(Model model) {
 		log.debug("Displaying all events");
-		model.addAttribute("events", repository.findAll());
+		model.addAttribute("events", service.findAll());
 		return LIST_VIEW_NAME;
 	}
 
@@ -75,7 +74,7 @@ public class EventsController {
 		}
 
 		log.debug("Submitting event form: " + event);
-		repository.save(event);
+		service.save(event);
 		return "redirect:/";
 	}
 
