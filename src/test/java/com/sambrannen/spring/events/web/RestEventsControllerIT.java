@@ -18,6 +18,7 @@ package com.sambrannen.spring.events.web;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.springframework.http.MediaType.*;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -56,7 +57,8 @@ public class RestEventsControllerIT {
 
 	@Before
 	public void setUpMockMvc() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(wac)
+		mockMvc = MockMvcBuilders.webAppContextSetup(wac)//
+			.apply(springSecurity())//
 			// .alwaysDo(print(System.err))
 			.build();
 	}
@@ -76,48 +78,55 @@ public class RestEventsControllerIT {
 	// ]
 
 	@Test
+	// curl -H "Accept:application/json" http://localhost:8080/events | json_pp
 	public void retrieveAllEvents() throws Exception {
-		// curl -H "Accept:application/json" http://localhost:8080/events | json_pp
 		mockMvc.perform(get("/events").accept(APPLICATION_JSON))//
 			.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))//
+			.andExpect(status().isOk())//
 			.andExpect(jsonPath("$[8]").exists())//
 			.andExpect(jsonPath("$[?(@.name =~ /Spring I\\/O/)].location",
-					hasItems("Madrid", "Barcelona")))//
-		;
+					hasItems("Madrid", "Barcelona")));
 	}
 
 	@Test
+	// curl -H "Accept:application/json" http://localhost:8080/events/9 | json_pp
 	public void retrieveEvent() throws Exception {
-		// curl -H "Accept:application/json" http://localhost:8080/events/9 | json_pp
 		mockMvc.perform(get("/events/{id}", 9).accept(APPLICATION_JSON))//
 			.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))//
+			.andExpect(status().isOk())//
 			.andExpect(jsonPath("$.id", is(9)))//
 			.andExpect(jsonPath("$.eventDate", is("2015-04-30")))//
 			.andExpect(jsonPath("$.name", is("Spring I/O")))//
-			.andExpect(jsonPath("$.location", is("Barcelona")))//
-		;
+			.andExpect(jsonPath("$.location", is("Barcelona")));
+	}
+
+	@Test
+	public void retrieveNonexistentEvent() throws Exception {
+		mockMvc.perform(get("/events/{id}", 12345).accept(APPLICATION_JSON))//
+			.andExpect(status().isNotFound());
 	}
 
 	@Test
 	@WithMockUser(roles = "ADMIN")
+	// curl -u admin:test -i -X POST -H "Content-Type:application/json" http://localhost:8080/events/ -d '{"name": "Spring!", "location": "Command Line"}'
 	public void createEvent() throws Exception {
-		// curl -u admin:test -i -X POST -H "Content-Type:application/json" http://localhost:8080/events/ -d '{"name": "Spring!", "location": "Command Line"}'
 		mockMvc.perform(
-			post("/events/").contentType(APPLICATION_JSON)
-				.content("{\"name\": \"Spring!\", \"location\": \"Integration Test\"}"))//
-			.andExpect(status().isCreated())//
-		;
+			post("/events/")
+				.contentType(APPLICATION_JSON)//
+				.content("{\"name\": \"Spring!\", \"location\": \"Integration Test\"}")//
+				//.with(user("admin").roles("ADMIN"))//
+			)
+			.andExpect(status().isCreated());
 	}
 
 	@Test
 	@WithMockUser(roles = "ADMIN")
+	// curl -u admin:test -i -X PUT -H "Content-Type:application/json" http://localhost:8080/events/9 -d '{"name": "Edited", "location": "Command Line"}'
 	public void updateEvent() throws Exception {
-		// curl -u admin:test -i -X PUT -H "Content-Type:application/json" http://localhost:8080/events/9 -d '{"name": "Edited", "location": "Command Line"}'
 		mockMvc.perform(
 			put("/events/{id}", 9).contentType(APPLICATION_JSON)
 				.content("{\"name\": \"Edited\", \"location\": \"Integration Test\"}"))//
-			.andExpect(status().isNoContent())//
-		;
+			.andExpect(status().isNoContent());
 	}
 
 	@Test
@@ -125,8 +134,7 @@ public class RestEventsControllerIT {
 	public void deleteEvent() throws Exception {
 		// curl -u admin:test -i -X DELETE http://localhost:8080/events/9
 		mockMvc.perform(delete("/events/{id}", 9))//
-			.andExpect(status().isNoContent())//
-		;
+			.andExpect(status().isNoContent());
 	}
 
 }
