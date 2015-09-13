@@ -63,22 +63,8 @@ public class RestEventsControllerIT {
 			.build();
 	}
 
-	// Example JSON Output
-	//
-	// [
-	// {"id":1,"eventDate":"2010-02-25","name":"Spring Geek Night","location":"Zurich"},
-	// {"id":2,"eventDate":"2011-02-17","name":"Spring I/O","location":"Madrid"},
-	// {"id":3,"eventDate":"2011-10-28","name":"SpringOne 2GX","location":"Chicago"},
-	// {"id":4,"eventDate":"2012-10-18","name":"SpringOne 2GX","location":"Washington, D.C."},
-	// {"id":5,"eventDate":"2013-11-14","name":"Devoxx","location":"Antwerp"},
-	// {"id":6,"eventDate":"2014-04-22","name":"Spring User Group","location":"Atlanta"},
-	// {"id":7,"eventDate":"2014-09-10","name":"SpringOne 2GX","location":"Dallas"},
-	// {"id":8,"eventDate":"2014-11-06","name":"Spring eXchange","location":"London"},
-	// {"id":9,"eventDate":"2015-04-30","name":"Spring I/O","location":"Barcelona"}
-	// ]
 
 	@Test
-	// curl -H "Accept:application/json" http://localhost:8080/events | json_pp
 	public void retrieveAllEvents() throws Exception {
 		mockMvc.perform(get("/events").accept(APPLICATION_JSON))//
 			.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))//
@@ -89,7 +75,6 @@ public class RestEventsControllerIT {
 	}
 
 	@Test
-	// curl -H "Accept:application/json" http://localhost:8080/events/9 | json_pp
 	public void retrieveEvent() throws Exception {
 		mockMvc.perform(get("/events/{id}", 9).accept(APPLICATION_JSON))//
 			.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))//
@@ -108,7 +93,6 @@ public class RestEventsControllerIT {
 
 	@Test
 	@WithMockUser(roles = "ADMIN")
-	// curl -u admin:test -i -X POST -H "Content-Type:application/json" http://localhost:8080/events/ -d '{"name": "Spring!", "location": "Command Line"}'
 	public void createEvent() throws Exception {
 		mockMvc.perform(
 			post("/events/")
@@ -121,7 +105,6 @@ public class RestEventsControllerIT {
 
 	@Test
 	@WithMockUser(roles = "ADMIN")
-	// curl -u admin:test -i -X PUT -H "Content-Type:application/json" http://localhost:8080/events/9 -d '{"name": "Edited", "location": "Command Line"}'
 	public void updateEvent() throws Exception {
 		mockMvc.perform(
 			put("/events/{id}", 9).contentType(APPLICATION_JSON)
@@ -132,9 +115,32 @@ public class RestEventsControllerIT {
 	@Test
 	@WithMockUser(roles = "ADMIN")
 	public void deleteEvent() throws Exception {
-		// curl -u admin:test -i -X DELETE http://localhost:8080/events/9
 		mockMvc.perform(delete("/events/{id}", 9))//
 			.andExpect(status().isNoContent());
 	}
 
 }
+
+// Example JSON Output
+//
+// [
+// {"id":1,"eventDate":"2010-02-25","name":"Spring Geek Night","location":"Zurich"},
+// {"id":2,"eventDate":"2011-02-17","name":"Spring I/O","location":"Madrid"},
+// {"id":3,"eventDate":"2011-10-28","name":"SpringOne 2GX","location":"Chicago"},
+// {"id":4,"eventDate":"2012-10-18","name":"SpringOne 2GX","location":"Washington, D.C."},
+// {"id":5,"eventDate":"2013-11-14","name":"Devoxx","location":"Antwerp"},
+// {"id":6,"eventDate":"2014-04-22","name":"Spring User Group","location":"Atlanta"},
+// {"id":7,"eventDate":"2014-09-10","name":"SpringOne 2GX","location":"Dallas"},
+// {"id":8,"eventDate":"2014-11-06","name":"Spring eXchange","location":"London"},
+// {"id":9,"eventDate":"2015-04-30","name":"Spring I/O","location":"Barcelona"}
+// ]
+
+// curl -H "Accept:application/json" http://localhost:8080/events | json_pp
+
+// curl -H "Accept:application/json" http://localhost:8080/events/9 | json_pp
+
+// curl -u admin:test -i -X POST -H "Content-Type:application/json" http://localhost:8080/events/ -d '{"name": "Spring!", "location": "Command Line"}'
+
+// curl -u admin:test -i -X PUT -H "Content-Type:application/json" http://localhost:8080/events/9 -d '{"name": "Edited", "location": "Command Line"}'
+
+// curl -u admin:test -i -X DELETE http://localhost:8080/events/9
