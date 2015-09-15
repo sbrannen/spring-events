@@ -17,6 +17,7 @@
 package com.sambrannen.spring.events.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.sambrannen.spring.events.domain.Event;
 
@@ -26,5 +27,6 @@ import com.sambrannen.spring.events.domain.Event;
  * @author Sam Brannen
  * @since 1.0
  */
+@Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 }
