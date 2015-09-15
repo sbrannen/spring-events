@@ -17,6 +17,7 @@
 package com.sambrannen.spring.events.repository;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.StrictAssertions.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,7 +28,6 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import com.sambrannen.spring.events.domain.Event;
-import com.sambrannen.spring.events.repository.EventRepository;
 
 /**
  * Integration tests for the {@link EventRepository}.
