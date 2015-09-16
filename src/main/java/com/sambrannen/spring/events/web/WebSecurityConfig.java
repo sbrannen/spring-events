@@ -18,10 +18,12 @@ package com.sambrannen.spring.events.web;
 
 import static org.springframework.http.HttpMethod.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
@@ -31,7 +33,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @since 1.0
  */
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig {
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication()
+			.withUser("admin").password("test").roles("ADMIN");
+	}
 
 	@Configuration
 	@Order(1)
@@ -40,7 +49,6 @@ public class WebSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
-				.csrf().disable()
 				.antMatcher("/events/**")
 				.authorizeRequests()
 					.antMatchers(GET, "/**").permitAll()
@@ -48,13 +56,8 @@ public class WebSecurityConfig {
 					.antMatchers(POST, "/**").hasRole("ADMIN")
 					.antMatchers(DELETE, "/**").hasRole("ADMIN")
 					.and()
+				.csrf().disable()
 				.httpBasic();
-		}
-
-		@Override
-		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.inMemoryAuthentication()
-				.withUser("admin").password("test").roles("ADMIN");
 		}
 	}
 
@@ -65,20 +68,13 @@ public class WebSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
-				.csrf().disable()
 				.authorizeRequests()
 					.antMatchers("/", "/favicon.ico", "/css/**", "/images/**").permitAll()
-					.antMatchers("/form**", "/h2-console/**").hasRole("ADMIN")
+					.antMatchers("/form**").hasRole("ADMIN")
+					.antMatchers("/h2-console/**").hasRole("ADMIN")
 					.and()
+				.csrf().disable()
 				.formLogin();
-		}
-
-		@Override
-		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.inMemoryAuthentication()
-				.withUser("admin").password("test").roles("ADMIN")
-				.and()
-				.withUser("user").password("test").roles("USER");
 		}
 	}
 
