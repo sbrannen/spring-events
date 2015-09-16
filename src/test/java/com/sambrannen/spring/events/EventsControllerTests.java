@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2015 the original author or authors.
+ * Copyright 2010-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,13 @@
 
 package com.sambrannen.spring.events;
 
-import java.util.Collections;
+import static java.util.Collections.*;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -25,9 +31,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.rules.SpringClassRule;
 import org.springframework.test.context.junit4.rules.SpringMethodRule;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -35,17 +41,10 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 import com.sambrannen.spring.events.domain.Event;
 import com.sambrannen.spring.events.service.StandardEventService;
 import com.sambrannen.spring.events.web.EventsController;
-
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-
 
 /**
  * @author Nicolas Frankel
@@ -53,7 +52,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  * @since 1.0
  */
 @RunWith(MockitoJUnitRunner.class)
-@SpringApplicationConfiguration
+@ContextConfiguration
 @WebAppConfiguration
 public class EventsControllerTests {
 
@@ -64,20 +63,22 @@ public class EventsControllerTests {
     public final SpringMethodRule springRule = new SpringMethodRule();
 
     @Autowired
-	private WebApplicationContext wac;
+	WebApplicationContext wac;
 
-    private MockMvc mockMvc;
+	@Autowired
+	EventsController controller;
+
+	MockMvc mockMvc;
 
     @Mock
-    private StandardEventService eventService;
+	StandardEventService eventService;
 
 
     @Before
     public void setUp() {
-        mockMvc = webAppContextSetup(wac).build();
-        EventsController controller = wac.getBean(EventsController.class);
+		mockMvc = webAppContextSetup(wac).build();
+		when(eventService.findAll()).thenReturn(singletonList(new Event(1L)));
         ReflectionTestUtils.setField(controller, "service", eventService);
-        when(eventService.findAll()).thenReturn(Collections.singletonList(new Event(1L)));
     }
 
     @Test

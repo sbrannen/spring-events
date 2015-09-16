@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2015 the original author or authors.
+ * Copyright 2010-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,8 +34,11 @@ import org.springframework.web.context.WebApplicationContext;
 import com.sambrannen.spring.events.Application;
 
 /**
+ * JUnit based integration tests for the {@link EventsController}.
+ *
  * @author Nicolas Frankel
  * @since 1.0
+ * @see EventsControllerTestNgIT
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
@@ -43,9 +46,9 @@ import com.sambrannen.spring.events.Application;
 public class EventsControllerIT {
 
     @Autowired
-    private WebApplicationContext wac;
+	WebApplicationContext wac;
 
-    private MockMvc mockMvc;
+	MockMvc mockMvc;
 
     @Before
     public void setUp() {
