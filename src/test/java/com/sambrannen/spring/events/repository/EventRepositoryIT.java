@@ -38,8 +38,6 @@ import com.sambrannen.spring.events.domain.Event;
 @SpringApplicationConfiguration(TestRepositoryConfig.class)
 public class EventRepositoryIT extends AbstractTransactionalJUnit4SpringContextTests {
 
-	private static final String EVENTS_TABLE = "event";
-
 	@Autowired
 	EventRepository repo;
 
@@ -106,7 +104,7 @@ public class EventRepositoryIT extends AbstractTransactionalJUnit4SpringContextT
 	}
 
 	private int countNumEvents() {
-		return countRowsInTable(EVENTS_TABLE);
+		return countRowsInTable("event");
 	}
 
 	private void assertNumEvents(int expectedNumRows) {
