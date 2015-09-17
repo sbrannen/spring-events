@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -52,9 +53,7 @@ public class WebSecurityConfig {
 				.antMatcher("/events/**")
 				.authorizeRequests()
 					.antMatchers(GET, "/**").permitAll()
-					.antMatchers(PUT, "/**").hasRole("ADMIN")
-					.antMatchers(POST, "/**").hasRole("ADMIN")
-					.antMatchers(DELETE, "/**").hasRole("ADMIN")
+					.antMatchers("/**").hasRole("ADMIN")
 					.and()
 				.csrf().disable()
 				.httpBasic();
@@ -66,12 +65,15 @@ public class WebSecurityConfig {
 	public static class FormLoginWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		@Override
+		public void configure(WebSecurity web) throws Exception {
+			web.ignoring().antMatchers("/", "/favicon.ico", "/css/**", "/images/**");
+		}
+
+		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
 				.authorizeRequests()
-					.antMatchers("/", "/favicon.ico", "/css/**", "/images/**").permitAll()
-					.antMatchers("/form**").hasRole("ADMIN")
-					.antMatchers("/h2-console/**").hasRole("ADMIN")
+					.antMatchers("/form**", "/h2-console/**").hasRole("ADMIN")
 					.and()
 				.csrf().disable()
 				.formLogin();
