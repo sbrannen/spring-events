@@ -16,20 +16,22 @@
 
 package com.sambrannen.spring.events.web;
 
+import static org.springframework.http.HttpStatus.*;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.*;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.composed.web.rest.DeleteResource;
-import org.springframework.composed.web.rest.json.GetJson;
-import org.springframework.composed.web.rest.json.PostJson;
-import org.springframework.composed.web.rest.json.PutJson;
+import org.springframework.composed.web.Delete;
+import org.springframework.composed.web.Get;
+import org.springframework.composed.web.Post;
+import org.springframework.composed.web.Put;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
@@ -54,17 +56,17 @@ public class RestEventsController {
 		this.service = service;
 	}
 
-	@GetJson
+	@Get
 	public List<Event> retrieveAllEvents() {
 		return service.findAll();
 	}
 
-	@GetJson("/{id}")
+	@Get("/{id}")
 	public Event retrieveEvent(@PathVariable Long id) {
 		return service.findById(id);
 	}
 
-	@PostJson
+	@Post
 	public HttpEntity<Void> createEvent(@RequestBody Event postedEvent) {
 		Event savedEvent = service.save(postedEvent);
 
@@ -74,12 +76,14 @@ public class RestEventsController {
 		return ResponseEntity.created(uriComponents.encode().toUri()).build();
 	}
 
-	@PutJson("/{id}")
+	@Put("/{id}")
+	@ResponseStatus(NO_CONTENT)
 	public void updateEvent(@RequestBody Event updatedEvent) {
 		service.save(updatedEvent);
 	}
 
-	@DeleteResource("/{id}")
+	@Delete("/{id}")
+	@ResponseStatus(NO_CONTENT)
 	public void deleteEvent(@PathVariable Long id) {
 		service.deleteById(id);
 	}
