@@ -40,6 +40,7 @@ ext.springBootVersion      = '1.3.0.M5'
 ext.springBootAdminVersion = '1.2.2'
 ext.springVersion          = '4.2.1.RELEASE'
 ext.springSecurityVersion  = '4.0.2.RELEASE'
+ext.springComposedVersion  = '1.0.0.BUILD-SNAPSHOT'
 ext.testNGVersion          = '6.9.6'
 
 repositories {
@@ -60,6 +61,7 @@ dependencies {
     compile("org.projectlombok:lombok:${lombokVersion}")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDateTimeVersion}")
     compile("com.h2database:h2:${h2Version}")
+    compile("org.springframework.composed:spring-composed:${springComposedVersion}")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.springframework.security:spring-security-test:${springSecurityVersion}")
