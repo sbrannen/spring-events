@@ -17,7 +17,6 @@
 package com.sambrannen.spring.events.repository;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.StrictAssertions.*;
 
 import java.time.LocalDate;
 import java.util.List;

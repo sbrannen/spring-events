@@ -17,14 +17,13 @@
 package com.sambrannen.spring.events.domain;
 
 import static com.sambrannen.spring.events.domain.EventTestUtils.*;
-import static org.assertj.core.api.StrictAssertions.*;
+import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.util.ReflectionTestUtils.*;
 
 import org.testng.annotations.Test;
 
 /**
- * Copy of {@link EventTests} that replaces JUnit with TestNG and focuses
- * on testing one feature per test method.
+ * Copy of {@link EventTests} that replaces JUnit with TestNG.
  *
  * @author Sam Brannen
  * @author Nicolas Frankel
@@ -55,7 +54,7 @@ public class TestNgEventTest {
 	}
 
 	@Test
-	public void eventShouldBeEqualWithDifferentIdButSameName() {
+	public void eventsShouldBeEqualWithDifferentIdsButTheSameName() {
 		Event event1 = createEvent(1L);
 		Event event2 = createEvent(2L);
 
@@ -65,7 +64,7 @@ public class TestNgEventTest {
 	}
 
 	@Test
-	public void eventShouldNotBeEqualWithSameIdButDifferentName() {
+	public void eventsShouldNotBeEqualWithTheSameIdButDifferentNames() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 
@@ -75,7 +74,7 @@ public class TestNgEventTest {
 	}
 
 	@Test
-	public void eventShouldHaveSameHashCodeWithDifferentIdButSameName() {
+	public void eventsShouldHaveSameHashCodeWithDifferentIdsButTheSameName() {
 		Event event1 = createEvent(1L);
 		Event event2 = createEvent(2L);
 
@@ -85,7 +84,7 @@ public class TestNgEventTest {
 	}
 
 	@Test
-	public void eventShouldNotHaveSameHashCodeWithSameIdButDifferentName() {
+	public void eventsShouldNotHaveSameHashCodeWithTheSameIdButDifferentNames() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 

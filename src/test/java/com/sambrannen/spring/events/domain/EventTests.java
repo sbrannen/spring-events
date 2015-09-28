@@ -17,7 +17,7 @@
 package com.sambrannen.spring.events.domain;
 
 import static com.sambrannen.spring.events.domain.EventTestUtils.*;
-import static org.assertj.core.api.StrictAssertions.*;
+import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.util.ReflectionTestUtils.*;
 
 import org.junit.Test;
@@ -54,7 +54,7 @@ public class EventTests {
 	}
 
 	@Test
-	public void eventShouldBeEqualWithDifferentIdButSameName() {
+	public void eventsShouldBeEqualWithDifferentIdsButTheSameName() {
 		Event event1 = createEvent(1L);
 		Event event2 = createEvent(2L);
 
@@ -64,7 +64,7 @@ public class EventTests {
 	}
 
 	@Test
-	public void eventShouldNotBeEqualWithSameIdButDifferentName() {
+	public void eventsShouldNotBeEqualWithTheSameIdButDifferentNames() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 
@@ -74,7 +74,7 @@ public class EventTests {
 	}
 
 	@Test
-	public void eventShouldHaveSameHashCodeWithDifferentIdButSameName() {
+	public void eventsShouldHaveSameHashCodeWithDifferentIdsButTheSameName() {
 		Event event1 = createEvent(1L);
 		Event event2 = createEvent(2L);
 
@@ -84,7 +84,7 @@ public class EventTests {
 	}
 
 	@Test
-	public void eventShouldNotHaveSameHashCodeWithSameIdButDifferentName() {
+	public void eventsShouldNotHaveSameHashCodeWithTheSameIdButDifferentNames() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 

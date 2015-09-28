@@ -43,20 +43,21 @@ import com.sambrannen.spring.events.Application;
 @WebAppConfiguration
 public class EventsControllerTestNgIT extends AbstractTestNGSpringContextTests {
 
-    @Autowired
+	@Autowired
 	WebApplicationContext wac;
 
 	MockMvc mockMvc;
 
-    @BeforeMethod
-    protected void setUp() {
-        mockMvc = webAppContextSetup(wac).build();
+	@BeforeMethod
+	protected void setUp() {
+		mockMvc = webAppContextSetup(wac).build();
+	}
+
+	@Test
+	public void shouldDisplayNineItemsInitially() throws Exception {
+		mockMvc.perform(get("/"))
+			.andExpect(view().name("event/list"))
+			.andExpect(model().attribute("events", hasSize(9)));
     }
 
-    @Test
-    public void shouldDisplayNineItemsInitially() throws Exception {
-        mockMvc.perform(get("/"))
-            .andExpect(view().name("event/list"))
-            .andExpect(model().attribute("events", hasSize(9)));
-    }
 }

@@ -45,21 +45,22 @@ import com.sambrannen.spring.events.Application;
 @WebAppConfiguration
 public class EventsControllerIT {
 
-    @Autowired
+	@Autowired
 	WebApplicationContext wac;
 
 	MockMvc mockMvc;
 
-    @Before
-    public void setUp() {
-        mockMvc = webAppContextSetup(wac).build();
-    }
 
-    @Test
-    public void shouldDisplayNineItemsInitially() throws Exception {
-        mockMvc.perform(get("/"))
-            .andExpect(view().name("event/list"))
-            .andExpect(model().attribute("events", hasSize(9)));
-    }
+	@Before
+	public void setUp() {
+		mockMvc = webAppContextSetup(wac).build();
+	}
+
+	@Test
+	public void shouldDisplayNineItemsInitially() throws Exception {
+		mockMvc.perform(get("/"))
+			.andExpect(view().name("event/list"))
+			.andExpect(model().attribute("events", hasSize(9)));
+	}
 
 }
