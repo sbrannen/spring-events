@@ -37,6 +37,7 @@ import com.sambrannen.spring.events.Application;
  * JUnit based integration tests for the {@link EventsController}.
  *
  * @author Nicolas Frankel
+ * @author Sam Brannen
  * @since 1.0
  * @see EventsControllerTestNgIT
  */
@@ -57,10 +58,10 @@ public class EventsControllerIT {
 	}
 
 	@Test
-	public void shouldDisplayNineItemsInitially() throws Exception {
+	public void shouldDisplayTenItemsInitially() throws Exception {
 		mockMvc.perform(get("/"))
 			.andExpect(view().name("event/list"))
-			.andExpect(model().attribute("events", hasSize(9)));
+			.andExpect(model().attribute("events", hasSize(greaterThanOrEqualTo(10))));
 	}
 
 }

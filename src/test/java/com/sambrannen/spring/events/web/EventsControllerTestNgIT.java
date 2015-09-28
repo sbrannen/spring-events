@@ -54,10 +54,10 @@ public class EventsControllerTestNgIT extends AbstractTestNGSpringContextTests {
 	}
 
 	@Test
-	public void shouldDisplayNineItemsInitially() throws Exception {
+	public void shouldDisplayTenItemsInitially() throws Exception {
 		mockMvc.perform(get("/"))
 			.andExpect(view().name("event/list"))
-			.andExpect(model().attribute("events", hasSize(9)));
+			.andExpect(model().attribute("events", hasSize(greaterThanOrEqualTo(10))));
     }
 
 }

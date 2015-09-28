@@ -77,13 +77,14 @@ public class EventsControllerTests {
     @Before
     public void setUp() {
 		mockMvc = webAppContextSetup(wac).build();
-		when(eventService.findAll()).thenReturn(singletonList(new Event(1L)));
-        ReflectionTestUtils.setField(controller, "service", eventService);
+		ReflectionTestUtils.setField(controller, "service", eventService);
     }
 
     @Test
     public void shouldDisplayRepositoryItemsInitially() throws Exception {
-        mockMvc.perform(get("/"))
+		when(eventService.findAll()).thenReturn(singletonList(new Event(1L)));
+
+		mockMvc.perform(get("/"))
             .andExpect(view().name("event/list"))
             .andExpect(model().attribute("events", hasSize(1)));
     }
