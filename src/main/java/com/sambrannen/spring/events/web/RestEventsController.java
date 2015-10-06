@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
 import com.sambrannen.spring.events.domain.Event;
@@ -70,8 +69,8 @@ public class RestEventsController {
 	public HttpEntity<Void> createEvent(@RequestBody Event postedEvent) {
 		Event savedEvent = service.save(postedEvent);
 
-		UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodCall(
-			on(RestEventsController.class).retrieveEvent(savedEvent.getId())).build();
+		UriComponents uriComponents = fromMethodCall(
+			on(getClass()).retrieveEvent(savedEvent.getId())).build();
 
 		return ResponseEntity.created(uriComponents.encode().toUri()).build();
 	}
