@@ -31,7 +31,7 @@ targetCompatibility = 1.8
 
 ext.assertJVersion         = '3.2.0'
 ext.h2Version              = '1.4.188'
-ext.htmlunitVersion        = '2.18'
+ext.htmlunitVersion        = '2.19'
 ext.jacksonDateTimeVersion = '2.6.1'
 ext.jsonpathVersion        = '2.0.0'
 ext.lombokVersion          = '1.16.4'
