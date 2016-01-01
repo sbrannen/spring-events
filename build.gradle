@@ -41,7 +41,7 @@ ext.springBootAdminVersion = '1.2.2'
 ext.springVersion          = '4.2.4.RELEASE'
 ext.springSecurityVersion  = '4.0.3.RELEASE'
 ext.springComposedVersion  = '1.0.0.BUILD-SNAPSHOT'
-ext.testNGVersion          = '6.9.6'
+ext.testNGVersion          = '6.9.10'
 
 repositories {
     mavenCentral()
