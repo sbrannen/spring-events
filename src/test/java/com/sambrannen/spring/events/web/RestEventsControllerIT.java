@@ -70,7 +70,7 @@ public class RestEventsControllerIT {
 			.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))//
 			.andExpect(status().isOk())//
 			.andExpect(jsonPath("$[8]").exists())//
-			.andExpect(jsonPath("$[?(@.name =~ /Spring I\\/O/)].location",
+			.andExpect(jsonPath("$[?(@.name =~ /Spring I.O/)].location",
 					hasItems("Madrid", "Barcelona")));
 	}
 

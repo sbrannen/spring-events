@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-    id "io.spring.dependency-management" version "0.4.1.RELEASE"
+    id "io.spring.dependency-management" version "0.5.6.RELEASE"
 }
 
 apply plugin: 'java'
@@ -29,18 +29,16 @@ jar {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-ext.assertJVersion         = '3.2.0'
-ext.h2Version              = '1.4.188'
+ext.assertJVersion         = '3.3.0'
+ext.h2Version              = '1.4.191'
 ext.htmlunitVersion        = '2.19'
-ext.jacksonDateTimeVersion = '2.6.1'
-ext.jsonpathVersion        = '2.0.0'
-ext.lombokVersion          = '1.16.4'
-ext.seleniumVersion        = '2.47.1'
-ext.springBootVersion      = '1.3.1.RELEASE'
-ext.springBootAdminVersion = '1.2.2'
-ext.springVersion          = '4.2.4.RELEASE'
-ext.springSecurityVersion  = '4.0.3.RELEASE'
+ext.jacksonDateTimeVersion = '2.7.1'
+ext.jsonpathVersion        = '2.1.0'
+ext.lombokVersion          = '1.16.6'
+ext.seleniumVersion        = '2.52.0'
 ext.springBootVersion      = '1.3.3.RELEASE'
+ext.springVersion          = '4.2.5.RELEASE'
+ext.springSecurityVersion  = '4.0.4.RELEASE'
 ext.springComposedVersion  = '1.0.0.BUILD-SNAPSHOT'
 ext.testNGVersion          = '6.9.10'
 
