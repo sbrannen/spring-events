@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.3.3.RELEASE'
+        springBootVersion = '1.3.5.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -30,15 +30,15 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 ext.assertJVersion         = '3.3.0'
-ext.h2Version              = '1.4.191'
-ext.htmlunitVersion        = '2.20'
-ext.jacksonDateTimeVersion = '2.7.3'
+ext.h2Version              = '1.4.192'
+ext.htmlunitVersion        = '2.22'
+ext.jacksonDateTimeVersion = '2.7.5'
 ext.jsonpathVersion        = '2.2.0'
 ext.lombokVersion          = '1.16.8'
 ext.seleniumVersion        = '2.52.0'
-ext.springBootVersion      = '1.3.3.RELEASE'
-ext.springVersion          = '4.2.5.RELEASE'
-ext.springSecurityVersion  = '4.0.4.RELEASE'
+ext.springBootVersion      = '1.3.5.RELEASE'
+ext.springVersion          = '4.3.0.RELEASE'
+ext.springSecurityVersion  = '4.1.0.RELEASE'
 ext.springComposedVersion  = '1.0.0.BUILD-SNAPSHOT'
 ext.testNGVersion          = '6.9.10'
 
