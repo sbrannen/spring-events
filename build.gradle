@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.3.5.RELEASE'
+        springBootVersion = '1.3.6.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -36,8 +36,8 @@ ext.jacksonDateTimeVersion = '2.7.5'
 ext.jsonpathVersion        = '2.2.0'
 ext.lombokVersion          = '1.16.8'
 ext.seleniumVersion        = '2.52.0'
-ext.springBootVersion      = '1.3.5.RELEASE'
-ext.springVersion          = '4.3.0.RELEASE'
+ext.springBootVersion      = '1.3.6.RELEASE'
+ext.springVersion          = '4.3.1.RELEASE'
 ext.springSecurityVersion  = '4.1.0.RELEASE'
 ext.springComposedVersion  = '1.0.0.BUILD-SNAPSHOT'
 ext.testNGVersion          = '6.9.10'
