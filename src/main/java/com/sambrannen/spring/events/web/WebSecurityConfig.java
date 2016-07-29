@@ -16,12 +16,10 @@
 
 package com.sambrannen.spring.events.web;
 
-import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.HttpMethod.GET;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,12 +34,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-			.withUser("admin").password("test").roles("ADMIN");
-	}
 
 	@Configuration
 	@Order(1)
