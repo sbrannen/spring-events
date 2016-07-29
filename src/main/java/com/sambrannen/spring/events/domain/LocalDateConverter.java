@@ -38,7 +38,11 @@ public class LocalDateConverter implements AttributeConverter<LocalDate, Date> {
 
 	@Override
 	public LocalDate convertToEntityAttribute(Date date) {
-		return date.toLocalDate();
+	  if (date == null) {
+	    return null;
+	  } else {
+		  return date.toLocalDate();
+	  }
 	}
 
 }
