@@ -37,7 +37,7 @@ targetCompatibility = 1.8
 
 ext.assertJVersion         = '3.5.2'
 ext.h2Version              = '1.4.192'
-ext.hibernateJava8Version  = '5.1.0.Final'
+ext.hibernateVersion       = '5.2.1.Final'
 ext.htmlunitVersion        = '2.23'
 ext.jacksonDateTimeVersion = '2.7.5'
 ext.jsonpathVersion        = '2.2.0'
@@ -47,9 +47,12 @@ ext.log4jVersion           = '2.6.2'
 ext.lombokVersion          = '1.16.10'
 ext.seleniumVersion        = '2.52.0'
 ext.springBootVersion      = '1.4.0.RELEASE'
-ext.springSecurityVersion  = '4.1.0.RELEASE'
-ext.springVersion          = '5.0.0.M1'
 ext.testNGVersion          = '6.9.10'
+
+// Special syntax for overriding spring-boot-dependencies
+ext['hibernate.version']       = hibernateVersion
+ext['spring.security.version'] = '4.1.1.RELEASE'
+ext['spring.version']          = '5.0.0.M1'
 
 repositories {
     mavenCentral()
@@ -68,11 +71,11 @@ dependencies {
 
 	compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDateTimeVersion}")
 	compile("com.h2database:h2:${h2Version}")
-	compile("org.hibernate:hibernate-java8:${hibernateJava8Version}")
+	compile("org.hibernate:hibernate-java8:${hibernateVersion}")
 	compile("org.projectlombok:lombok:${lombokVersion}")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
-    testCompile("org.springframework.security:spring-security-test:${springSecurityVersion}")
+    testCompile("org.springframework.security:spring-security-test")
 	testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
 	testCompile("org.junit.platform:junit-platform-runner:${junitPlatformVersion}")
     testCompile("com.jayway.jsonpath:json-path:${jsonpathVersion}")
@@ -84,20 +87,6 @@ dependencies {
 	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 	testRuntime("org.apache.logging.log4j:log4j-core:${log4jVersion}") // for JUnit 5
 	testRuntime("org.apache.logging.log4j:log4j-jul:${log4jVersion}") // for JUnit 5
-}
-
-configurations.all {
-	resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-		if (details.requested.group == "org.springframework.boot") {
-			details.useVersion springBootVersion
-		}
-		if (details.requested.group == "org.springframework") {
-			details.useVersion springVersion
-		}
-		if (details.requested.group == "org.springframework.security") {
-			details.useVersion springSecurityVersion
-		}
-	}
 }
 
 junitPlatform {
