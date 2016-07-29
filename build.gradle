@@ -6,7 +6,6 @@ buildscript {
         mavenCentral()
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
-
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -43,7 +42,6 @@ ext.jacksonDateTimeVersion = '2.7.5'
 ext.jsonpathVersion        = '2.2.0'
 ext.junitJupiterVersion    = '5.0.0-M2'
 ext.junitPlatformVersion   = '1.0.0-M2'
-ext.log4jVersion           = '2.6.2'
 ext.lombokVersion          = '1.16.10'
 ext.seleniumVersion        = '2.52.0'
 ext.springBootVersion      = '1.4.0.RELEASE'
@@ -85,8 +83,6 @@ dependencies {
     testCompile("org.testng:testng:${testNGVersion}")
 
 	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-	testRuntime("org.apache.logging.log4j:log4j-core:${log4jVersion}") // for JUnit 5
-	testRuntime("org.apache.logging.log4j:log4j-jul:${log4jVersion}") // for JUnit 5
 }
 
 junitPlatform {
@@ -94,7 +90,6 @@ junitPlatform {
 	enableStandardTestTask false
 	// Only run JUnit Jupiter tests with the JUnit Platform
 	engines.include 'junit-jupiter'
-	logManager 'org.apache.logging.log4j.jul.LogManager'
 }
 
 task testNG(type: Test) {
