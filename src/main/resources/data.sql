@@ -8,3 +8,5 @@ insert into event (id, event_date, name, location) values (7,  '2014-09-10', 'Sp
 insert into event (id, event_date, name, location) values (8,  '2014-11-06', 'Spring eXchange', 'London');         -- Testing with Spring: An Introduction
 insert into event (id, event_date, name, location) values (9,  '2015-04-30', 'Spring I/O', 'Barcelona');           -- Testing with Spring 4.x
 insert into event (id, event_date, name, location) values (10, '2015-09-15', 'SpringOne 2GX', 'Washington, D.C.'); -- Get the Most out of Testing with Spring 4.2
+insert into event (id, event_date, name, location) values (11, '2016-05-19', 'Spring I/O', 'Barcelona');           -- JUnit 5: from Lambda to Alpha and Beyond
+insert into event (id, event_date, name, location) values (12, '2016-08-03', 'SpringOne Platform', 'Las Vegas');   -- Testing with Spring 4.3, JUnit 5, and Beyond
