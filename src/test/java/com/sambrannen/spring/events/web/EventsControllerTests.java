@@ -44,7 +44,7 @@ class EventsControllerTests {
 
 	@Test
 	@DisplayName("Home page should show at least 10 items")
-	void shouldDisplayTenItemsInitially() throws Exception {
+	void shouldDisplayAtLeastTenItemsInitially() throws Exception {
 		mockMvc.perform(get("/"))//
 				.andExpect(view().name("event/list"))//
 				.andExpect(model().attribute("events", hasSize(greaterThanOrEqualTo(10))));
