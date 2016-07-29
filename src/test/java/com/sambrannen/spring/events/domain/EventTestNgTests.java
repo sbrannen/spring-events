@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 the original author or authors.
+ * Copyright 2010-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,10 @@ import org.testng.annotations.Test;
  * @author Nicolas Frankel
  * @since 1.0
  */
-public class TestNgEventTest {
+public class EventTestNgTests {
 
 	@Test
-	public void lombokShouldSetCorrectly() {
+	void lombokShouldSetCorrectly() {
 		Event event = new Event(99L);
 		event.setName("Test Event");
 		event.setLocation("Unit Test");
@@ -43,7 +43,7 @@ public class TestNgEventTest {
 	}
 
 	@Test
-	public void lombokShouldGetCorrectly() {
+	void lombokShouldGetCorrectly() {
 		Event event = new Event(99L);
 		setField(event, "name", "Test Event");
 		setField(event, "location", "Unit Test");
@@ -54,7 +54,7 @@ public class TestNgEventTest {
 	}
 
 	@Test
-	public void eventsShouldBeEqualWithDifferentIdsButTheSameName() {
+	void eventsShouldBeEqualWithDifferentIdsButTheSameName() {
 		Event event1 = createEvent(1L);
 		Event event2 = createEvent(2L);
 
@@ -64,7 +64,7 @@ public class TestNgEventTest {
 	}
 
 	@Test
-	public void eventsShouldNotBeEqualWithTheSameIdButDifferentNames() {
+	void eventsShouldNotBeEqualWithTheSameIdButDifferentNames() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 
@@ -74,7 +74,7 @@ public class TestNgEventTest {
 	}
 
 	@Test
-	public void eventsShouldHaveSameHashCodeWithDifferentIdsButTheSameName() {
+	void eventsShouldHaveSameHashCodeWithDifferentIdsButTheSameName() {
 		Event event1 = createEvent(1L);
 		Event event2 = createEvent(2L);
 
@@ -84,7 +84,7 @@ public class TestNgEventTest {
 	}
 
 	@Test
-	public void eventsShouldNotHaveSameHashCodeWithTheSameIdButDifferentNames() {
+	void eventsShouldNotHaveSameHashCodeWithTheSameIdButDifferentNames() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 

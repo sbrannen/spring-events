@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 the original author or authors.
+ * Copyright 2010-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@ package com.sambrannen.spring.events.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.composed.stereotype.TransactionalService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sambrannen.spring.events.domain.Event;
@@ -33,13 +32,13 @@ import com.sambrannen.spring.events.repository.EventRepository;
  * @author Sam Brannen
  * @since 1.0
  */
-@TransactionalService(readOnly = true)
+@Service
+@Transactional(readOnly = true)
 public class StandardEventService implements EventService {
 
 	private final EventRepository repository;
 
 
-	@Autowired
 	public StandardEventService(EventRepository repository) {
 		this.repository = repository;
 	}

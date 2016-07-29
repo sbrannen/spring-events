@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.3.6.RELEASE'
+        springBootVersion = '1.4.0.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -10,16 +10,20 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
     }
 }
 
 plugins {
-    id "io.spring.dependency-management" version "0.5.6.RELEASE"
+    id "io.spring.dependency-management" version "0.6.0.RELEASE"
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven'
 apply plugin: 'spring-boot' 
+apply plugin: 'com.github.ben-manes.versions' // gradle dependencyUpdates
 
 jar {
     baseName = 'spring-events'
@@ -29,17 +33,16 @@ jar {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-ext.assertJVersion         = '3.3.0'
+ext.assertJVersion         = '3.5.2'
 ext.h2Version              = '1.4.192'
-ext.htmlunitVersion        = '2.22'
+ext.htmlunitVersion        = '2.23'
 ext.jacksonDateTimeVersion = '2.7.5'
 ext.jsonpathVersion        = '2.2.0'
-ext.lombokVersion          = '1.16.8'
+ext.lombokVersion          = '1.16.10'
 ext.seleniumVersion        = '2.52.0'
-ext.springBootVersion      = '1.3.6.RELEASE'
-ext.springVersion          = '4.3.1.RELEASE'
+ext.springBootVersion      = '1.4.0.RELEASE'
+ext.springVersion          = '5.0.0.M1'
 ext.springSecurityVersion  = '4.1.0.RELEASE'
-ext.springComposedVersion  = '1.0.0.BUILD-SNAPSHOT'
 ext.testNGVersion          = '6.9.10'
 
 repositories {
@@ -60,7 +63,6 @@ dependencies {
     compile("org.projectlombok:lombok:${lombokVersion}")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDateTimeVersion}")
     compile("com.h2database:h2:${h2Version}")
-    compile("org.springframework.composed:spring-composed:${springComposedVersion}")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.springframework.security:spring-security-test:${springSecurityVersion}")
@@ -86,22 +88,22 @@ configurations.all {
 }
 
 task testNG(type: Test) {
-	description = 'Runs TestNG unit and integration tests.'
+	description = 'Runs TestNG tests.'
 	useTestNG()
 	scanForTestClasses = false
-	include(["**/*TestNg*IT.class", "**/*TestNg*Test.class"])
+	include '**/*TestNgTests.class'
 	// Show STD_OUT & STD_ERR of the test JVM(s) on the console:
 	// testLogging.showStandardStreams = true
 	// forkEvery 1
 }
 
 test {
-	description = 'Runs JUnit unit tests.'
+	description = 'Runs JUnit 4 tests.'
 	dependsOn testNG
 	useJUnit()
 
 	scanForTestClasses = false
-	include(["**/*Tests.class", "**/*Test.class"])
+	include '**/*Tests.class'
 	exclude '**/*TestNg*.*'
 	// Since we set scanForTestClasses to false, we need to filter out inner
 	// classes with the "$" pattern; otherwise, using -Dtest.single=MyTests to
@@ -109,18 +111,10 @@ test {
 	exclude(["**/Abstract*.class", '**/*$*'])
 }
 
-task integrationTest(type: Test) {
-	description = 'Runs JUnit integration tests.'
-	dependsOn test
-	useJUnit()
-	include '**/*IT.class'
-	exclude '**/*TestNg*.*'
-}
-
 task aggregateTestReports(type: TestReport) {
 	description = 'Aggregates JUnit and TestNG test reports.'
 	destinationDir = test.reports.html.destination
-	reportOn test, testNG, integrationTest
+	reportOn test, testNG
 }
 
 check.dependsOn aggregateTestReports

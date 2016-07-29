@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 the original author or authors.
+ * Copyright 2010-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,11 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.composed.web.Get;
-import org.springframework.composed.web.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sambrannen.spring.events.domain.Event;
 import com.sambrannen.spring.events.service.EventService;
@@ -47,26 +46,25 @@ public class EventsController {
 
 	private final EventService service;
 
-	@Autowired
 	public EventsController(EventService service) {
 		this.service = service;
 	}
 
-	@Get("/")
+	@GetMapping("/")
 	public String list(Model model) {
 		log.debug("Displaying all events");
 		model.addAttribute("events", service.findAll());
 		return LIST_VIEW_NAME;
 	}
 
-	@Get("/form")
+	@GetMapping("/form")
 	public String edit(Model model) {
 		log.debug("Displaying event form");
 		model.addAttribute(new Event());
 		return FORM_VIEW_NAME;
 	}
 
-	@Post("/form")
+	@PostMapping("/form")
 	public String submit(@Valid Event event, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			log.debug("Redisplaying event form");

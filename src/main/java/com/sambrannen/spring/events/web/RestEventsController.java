@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 the original author or authors.
+ * Copyright 2010-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,19 @@
 
 package com.sambrannen.spring.events.web;
 
-import static org.springframework.http.HttpStatus.*;
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.*;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.composed.web.Delete;
-import org.springframework.composed.web.Get;
-import org.springframework.composed.web.Post;
-import org.springframework.composed.web.Put;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -50,22 +50,21 @@ public class RestEventsController {
 
 	private final EventService service;
 
-	@Autowired
 	public RestEventsController(EventService service) {
 		this.service = service;
 	}
 
-	@Get
+	@GetMapping
 	public List<Event> retrieveAllEvents() {
 		return service.findAll();
 	}
 
-	@Get("/{id}")
+	@GetMapping("/{id}")
 	public Event retrieveEvent(@PathVariable Long id) {
 		return service.findById(id);
 	}
 
-	@Post
+	@PostMapping
 	public HttpEntity<Void> createEvent(@RequestBody Event postedEvent) {
 		Event savedEvent = service.save(postedEvent);
 
@@ -75,13 +74,13 @@ public class RestEventsController {
 		return ResponseEntity.created(uriComponents.encode().toUri()).build();
 	}
 
-	@Put("/{id}")
+	@PutMapping("/{id}")
 	@ResponseStatus(NO_CONTENT)
 	public void updateEvent(@RequestBody Event updatedEvent) {
 		service.save(updatedEvent);
 	}
 
-	@Delete("/{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(NO_CONTENT)
 	public void deleteEvent(@PathVariable Long id) {
 		service.deleteById(id);

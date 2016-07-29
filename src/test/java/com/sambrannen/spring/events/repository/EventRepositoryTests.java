@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 the original author or authors.
+ * Copyright 2010-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,15 @@
 
 package com.sambrannen.spring.events.repository;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import com.sambrannen.spring.events.domain.Event;
@@ -34,8 +35,10 @@ import com.sambrannen.spring.events.domain.Event;
  * @author Sam Brannen
  * @since 1.0
  */
-@SpringApplicationConfiguration(TestRepositoryConfig.class)
-public class EventRepositoryIT extends AbstractTransactionalJUnit4SpringContextTests {
+@SpringBootTest(classes = TestRepositoryConfig.class)
+// @DataJpaTest
+// @Import(WebSecurityConfig.class)
+public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringContextTests {
 
 	@Autowired
 	EventRepository repo;
