@@ -19,6 +19,7 @@ package com.sambrannen.spring.events.web;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
+import static org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint.SYSTEM_ERR;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
@@ -34,8 +36,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.sambrannen.spring.events.domain.Event;
 import com.sambrannen.spring.events.service.EventService;
-import com.sambrannen.spring.events.web.EventsController;
-import com.sambrannen.spring.events.web.WebSecurityConfig;
 
 /**
  * Integration tests for the {@link EventsController} with a mocked
@@ -45,9 +45,9 @@ import com.sambrannen.spring.events.web.WebSecurityConfig;
  * @since 1.0
  */
 @RunWith(SpringRunner.class)
-//@SpringBootTest(webEnvironment = MOCK)
-//@AutoConfigureMockMvc
+// @SpringBootTest(webEnvironment = MOCK)
 @WebMvcTest
+@AutoConfigureMockMvc(print = SYSTEM_ERR)
 @Import(WebSecurityConfig.class)
 public class EventsControllerWithMockedServiceTests {
 

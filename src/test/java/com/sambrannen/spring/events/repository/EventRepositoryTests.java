@@ -22,10 +22,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sambrannen.spring.events.domain.Event;
 
@@ -35,10 +38,13 @@ import com.sambrannen.spring.events.domain.Event;
  * @author Sam Brannen
  * @since 1.0
  */
+@RunWith(SpringRunner.class)
 @SpringBootTest(classes = TestRepositoryConfig.class)
-// @DataJpaTest
-// @Import(WebSecurityConfig.class)
-public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringContextTests {
+@Transactional
+public class EventRepositoryTests {
+
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 
 	@Autowired
 	EventRepository repo;
@@ -89,8 +95,7 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 		repo.flush();
 
 		assertNumEvents(numRowsInTable);
-		String updatedName = jdbcTemplate.queryForObject("select name from event where id=?", String.class,
-			updatedEvent.getId());
+		String updatedName = lookUpNameInDatabase(updatedEvent);
 		assertThat(updatedName).isEqualTo("updated name");
 	}
 
@@ -105,8 +110,12 @@ public class EventRepositoryTests extends AbstractTransactionalJUnit4SpringConte
 		assertNumEvents(numRowsInTable - 1);
 	}
 
+	private String lookUpNameInDatabase(Event event) {
+		return jdbcTemplate.queryForObject("select name from event where id=?", String.class, event.getId());
+	}
+
 	private int countNumEvents() {
-		return countRowsInTable("event");
+		return JdbcTestUtils.countRowsInTable(jdbcTemplate, "event");
 	}
 
 	private void assertNumEvents(int expectedNumRows) {
