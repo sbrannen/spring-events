@@ -31,9 +31,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = DEFINED_PORT)
+@Disabled
 class ApplicationTests {
 
-	@Disabled
 	@Test
 	void contextLoads() throws Exception {
 		System.in.read();

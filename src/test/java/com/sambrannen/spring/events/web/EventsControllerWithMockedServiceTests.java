@@ -46,7 +46,6 @@ import com.sambrannen.spring.events.service.EventService;
  * @since 1.0
  */
 @ExtendWith(SpringExtension.class)
-// @SpringBootTest(webEnvironment = MOCK)
 @WebMvcTest
 @AutoConfigureMockMvc(print = SYSTEM_ERR)
 @Import(WebSecurityConfig.class)

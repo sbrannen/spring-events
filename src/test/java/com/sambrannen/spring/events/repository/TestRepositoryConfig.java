@@ -37,5 +37,5 @@ import com.sambrannen.spring.events.domain.Event;
 @EnableJpaRepositories(basePackageClasses = EventRepository.class)
 @EntityScan(basePackageClasses = Event.class)
 @Import({ DataSourceAutoConfiguration.class, JdbcTemplateAutoConfiguration.class, HibernateJpaAutoConfiguration.class })
-public class TestRepositoryConfig {
+class TestRepositoryConfig {
 }
