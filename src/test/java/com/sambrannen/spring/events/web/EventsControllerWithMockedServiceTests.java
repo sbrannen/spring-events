@@ -24,14 +24,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.sambrannen.spring.events.domain.Event;
@@ -44,12 +45,12 @@ import com.sambrannen.spring.events.service.EventService;
  * @author Sam Brannen
  * @since 1.0
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 // @SpringBootTest(webEnvironment = MOCK)
 @WebMvcTest
 @AutoConfigureMockMvc(print = SYSTEM_ERR)
 @Import(WebSecurityConfig.class)
-public class EventsControllerWithMockedServiceTests {
+class EventsControllerWithMockedServiceTests {
 
 	@MockBean
 	EventService eventService;
@@ -57,13 +58,14 @@ public class EventsControllerWithMockedServiceTests {
 	@Autowired
 	MockMvc mockMvc;
 
+
 	@Test
-	public void listEvents() throws Exception {
+	void listEvents() throws Exception {
 		when(eventService.findAll()).thenReturn(singletonList(new Event(1L)));
 
-		mockMvc.perform(get("/"))
-			.andExpect(view().name("event/list"))
-			.andExpect(model().attribute("events", hasSize(1)));
+		mockMvc.perform(get("/"))//
+				.andExpect(view().name("event/list"))//
+				.andExpect(model().attribute("events", hasSize(1)));
 	}
 
 }

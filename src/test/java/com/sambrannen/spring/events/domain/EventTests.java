@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.util.ReflectionTestUtils.getField;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for the {@link Event} entity, basically just verifying that
@@ -30,10 +30,10 @@ import org.junit.Test;
  * @author Sam Brannen
  * @since 1.0
  */
-public class EventTests {
+class EventTests {
 
 	@Test
-	public void lombokShouldSetCorrectly() {
+	void lombokShouldSetCorrectly() {
 		Event event = new Event(99L);
 		event.setName("Test Event");
 		event.setLocation("Unit Test");
@@ -44,7 +44,7 @@ public class EventTests {
 	}
 
 	@Test
-	public void lombokShouldGetCorrectly() {
+	void lombokShouldGetCorrectly() {
 		Event event = new Event(99L);
 		setField(event, "name", "Test Event");
 		setField(event, "location", "Unit Test");
@@ -55,7 +55,7 @@ public class EventTests {
 	}
 
 	@Test
-	public void eventsShouldBeEqualWithDifferentIdsButTheSameName() {
+	void eventsShouldBeEqualWithDifferentIdsButTheSameName() {
 		Event event1 = createEvent(1L);
 		Event event2 = createEvent(2L);
 
@@ -65,7 +65,7 @@ public class EventTests {
 	}
 
 	@Test
-	public void eventsShouldNotBeEqualWithTheSameIdButDifferentNames() {
+	void eventsShouldNotBeEqualWithTheSameIdButDifferentNames() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 
@@ -75,7 +75,7 @@ public class EventTests {
 	}
 
 	@Test
-	public void eventsShouldHaveSameHashCodeWithDifferentIdsButTheSameName() {
+	void eventsShouldHaveSameHashCodeWithDifferentIdsButTheSameName() {
 		Event event1 = createEvent(1L);
 		Event event2 = createEvent(2L);
 
@@ -85,7 +85,7 @@ public class EventTests {
 	}
 
 	@Test
-	public void eventsShouldNotHaveSameHashCodeWithTheSameIdButDifferentNames() {
+	void eventsShouldNotHaveSameHashCodeWithTheSameIdButDifferentNames() {
 		Event event3 = createEvent("event 3");
 		Event event4 = createEvent("event 4");
 

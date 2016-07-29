@@ -10,6 +10,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M2'
 		classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
     }
 }
@@ -23,6 +24,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'spring-boot' 
+apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: 'com.github.ben-manes.versions' // gradle dependencyUpdates
 
 jar {
@@ -38,6 +40,9 @@ ext.h2Version              = '1.4.192'
 ext.htmlunitVersion        = '2.23'
 ext.jacksonDateTimeVersion = '2.7.5'
 ext.jsonpathVersion        = '2.2.0'
+ext.junitJupiterVersion    = '5.0.0-M2'
+ext.junitPlatformVersion   = '1.0.0-M2'
+ext.log4jVersion           = '2.6.2'
 ext.lombokVersion          = '1.16.10'
 ext.seleniumVersion        = '2.52.0'
 ext.springBootVersion      = '1.4.0.RELEASE'
@@ -60,6 +65,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-web")
 
+	compile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     compile("org.projectlombok:lombok:${lombokVersion}")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDateTimeVersion}")
     compile("com.h2database:h2:${h2Version}")
@@ -68,9 +74,14 @@ dependencies {
     testCompile("org.springframework.security:spring-security-test:${springSecurityVersion}")
     testCompile("org.assertj:assertj-core:${assertJVersion}")
     testCompile("com.jayway.jsonpath:json-path:${jsonpathVersion}")
+	testCompile("org.junit.platform:junit-platform-runner:${junitPlatformVersion}")
     testCompile("net.sourceforge.htmlunit:htmlunit:${htmlunitVersion}")
     testCompile("org.seleniumhq.selenium:selenium-htmlunit-driver:${seleniumVersion}")
     testCompile("org.testng:testng:${testNGVersion}")
+
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+	testRuntime("org.apache.logging.log4j:log4j-core:${log4jVersion}") // for JUnit 5
+	testRuntime("org.apache.logging.log4j:log4j-jul:${log4jVersion}") // for JUnit 5
 }
 
 configurations.all {
@@ -85,6 +96,14 @@ configurations.all {
 			details.useVersion springSecurityVersion
 		}
 	}
+}
+
+junitPlatform {
+	// Do NOT run JUnit 4 tests with the standard Gradle test task.
+	enableStandardTestTask false
+	// Only run JUnit Jupiter tests with the JUnit Platform
+	engines.include 'junit-jupiter'
+	logManager 'org.apache.logging.log4j.jul.LogManager'
 }
 
 task testNG(type: Test) {
@@ -112,7 +131,7 @@ test {
 }
 
 task aggregateTestReports(type: TestReport) {
-	description = 'Aggregates JUnit and TestNG test reports.'
+	description = 'Aggregates JUnit 4 and TestNG test reports.'
 	destinationDir = test.reports.html.destination
 	reportOn test, testNG
 }

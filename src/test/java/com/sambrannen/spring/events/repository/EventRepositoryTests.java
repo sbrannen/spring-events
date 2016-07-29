@@ -21,12 +21,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,10 +39,10 @@ import com.sambrannen.spring.events.domain.Event;
  * @author Sam Brannen
  * @since 1.0
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TestRepositoryConfig.class)
 @Transactional
-public class EventRepositoryTests {
+class EventRepositoryTests {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -51,20 +52,20 @@ public class EventRepositoryTests {
 
 
 	@Test
-	public void findAll() {
+	void findAll() {
 		List<Event> events = repo.findAll();
 		assertThat(events).isNotNull();
 		assertThat(events.size()).isGreaterThan(0);
 	}
 
 	@Test
-	public void findOne() {
+	void findOne() {
 		Event event = repo.findOne(1L);
 		assertThat(event).isNotNull();
 	}
 
 	@Test
-	public void save() {
+	void save() {
 		final int numRowsInTable = countNumEvents();
 		final LocalDate tomorrow = LocalDate.now().plusDays(1);
 
@@ -84,7 +85,7 @@ public class EventRepositoryTests {
 	}
 
 	@Test
-	public void update() {
+	void update() {
 		final int numRowsInTable = countNumEvents();
 
 		Event event = repo.findOne(1L);
@@ -100,7 +101,7 @@ public class EventRepositoryTests {
 	}
 
 	@Test
-	public void delete() {
+	void delete() {
 		final int numRowsInTable = countNumEvents();
 
 		Event event = repo.findOne(1L);

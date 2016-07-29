@@ -18,17 +18,20 @@ package com.sambrannen.spring.events.web;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint.SYSTEM_ERR;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.MOCK;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
@@ -38,20 +41,21 @@ import org.springframework.test.web.servlet.MockMvc;
  * @since 1.0
  * @see EventsControllerTestNgTests
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = MOCK)
-@AutoConfigureMockMvc
-public class EventsControllerTests {
+@AutoConfigureMockMvc(print = SYSTEM_ERR)
+class EventsControllerTests {
 
 	@Autowired
 	MockMvc mockMvc;
 
 
 	@Test
-	public void shouldDisplayTenItemsInitially() throws Exception {
-		mockMvc.perform(get("/"))
-			.andExpect(view().name("event/list"))
-			.andExpect(model().attribute("events", hasSize(greaterThanOrEqualTo(10))));
+	@DisplayName("Home page should show at least 10 items")
+	void shouldDisplayTenItemsInitially() throws Exception {
+		mockMvc.perform(get("/"))//
+				.andExpect(view().name("event/list"))//
+				.andExpect(model().attribute("events", hasSize(greaterThanOrEqualTo(10))));
 	}
 
 }

@@ -29,13 +29,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,18 +46,18 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Sam Brannen
  * @since 1.0
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = MOCK)
 @AutoConfigureMockMvc(print = SYSTEM_ERR)
 @Transactional
-public class RestEventsControllerTests {
+class RestEventsControllerTests {
 
 	@Autowired
 	MockMvc mockMvc;
 
 
 	@Test
-	public void retrieveAllEvents() throws Exception {
+	void retrieveAllEvents() throws Exception {
 		mockMvc.perform(get("/events").accept(APPLICATION_JSON))//
 			.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))//
 			.andExpect(status().isOk())//
@@ -66,7 +67,7 @@ public class RestEventsControllerTests {
 	}
 
 	@Test
-	public void retrieveEvent() throws Exception {
+	void retrieveEvent() throws Exception {
 		mockMvc.perform(get("/events/{id}", 9).accept(APPLICATION_JSON))//
 			.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))//
 			.andExpect(status().isOk())//
@@ -77,14 +78,14 @@ public class RestEventsControllerTests {
 	}
 
 	@Test
-	public void retrieveNonexistentEvent() throws Exception {
+	void retrieveNonexistentEvent() throws Exception {
 		mockMvc.perform(get("/events/{id}", 12345).accept(APPLICATION_JSON))//
 			.andExpect(status().isNotFound());
 	}
 
 	@Test
 	@WithMockUser(roles = "ADMIN")
-	public void createEvent() throws Exception {
+	void createEvent() throws Exception {
 		mockMvc.perform(
 			post("/events/")
 				.contentType(APPLICATION_JSON)//
@@ -96,7 +97,7 @@ public class RestEventsControllerTests {
 
 	@Test
 	@WithMockUser(roles = "ADMIN")
-	public void updateEvent() throws Exception {
+	void updateEvent() throws Exception {
 		mockMvc.perform(
 			put("/events/{id}", 9).contentType(APPLICATION_JSON)
 				.content("{\"name\": \"Edited\", \"location\": \"Integration Test\"}"))//
@@ -105,7 +106,7 @@ public class RestEventsControllerTests {
 
 	@Test
 	@WithMockUser(roles = "ADMIN")
-	public void deleteEvent() throws Exception {
+	void deleteEvent() throws Exception {
 		mockMvc.perform(delete("/events/{id}", 9))//
 			.andExpect(status().isNoContent());
 	}

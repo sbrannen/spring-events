@@ -16,24 +16,27 @@
 
 package com.sambrannen.spring.events;
 
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * @author Sam Brannen
  * @since 1.0
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
-public class ApplicationTests {
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = DEFINED_PORT)
+class ApplicationTests {
 
+	@Disabled
 	@Test
-	public void contextLoads() throws Exception {
-		// System.in.read();
+	void contextLoads() throws Exception {
+		System.in.read();
 	}
 
 }

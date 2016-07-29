@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2016 the original author or authors.
+ * Copyright 2002-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,29 +14,22 @@
  * limitations under the License.
  */
 
-package com.sambrannen.spring.events.domain;
+package com.sambrannen.spring.events;
+
+import org.junit.platform.runner.IncludeEngines;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.runner.SelectPackages;
+
+import org.junit.runner.RunWith;
 
 /**
- * Collection of test utilities for working with the {@link Event} entity.
+ * Test suite for the Spring Events application that runs on the JUnit Platform.
  *
  * @author Sam Brannen
  * @since 1.0
  */
-class EventTestUtils {
-
-	static Event createEvent(Long id) {
-		return createEvent(id, "Test Event");
-	}
-
-	static Event createEvent(String name) {
-		return createEvent(99L, name);
-	}
-
-	static Event createEvent(Long id, String name) {
-		Event event = new Event(id);
-		event.setName(name);
-		event.setLocation("Unit Test");
-		return event;
-	}
-
+@RunWith(JUnitPlatform.class)
+@SelectPackages("com.sambrannen.spring.events")
+@IncludeEngines("junit-jupiter")
+public class SpringEventsJUnit5TestSuite {
 }
