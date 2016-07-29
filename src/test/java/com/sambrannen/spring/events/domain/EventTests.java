@@ -16,9 +16,10 @@
 
 package com.sambrannen.spring.events.domain;
 
-import static com.sambrannen.spring.events.domain.EventTestUtils.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.springframework.test.util.ReflectionTestUtils.*;
+import static com.sambrannen.spring.events.domain.EventTestUtils.createEvent;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.util.ReflectionTestUtils.getField;
+import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 import org.junit.Test;
 
