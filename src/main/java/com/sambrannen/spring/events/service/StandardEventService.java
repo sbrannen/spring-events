@@ -50,11 +50,8 @@ public class StandardEventService implements EventService {
 
 	@Override
 	public Event findById(Long id) {
-		Event event = repository.findOne(id);
-		if (event == null) {
-			throw new EventNotFoundException("Could not find Event with ID [" + id + "]");
-		}
-		return event;
+		return repository.findById(id).orElseThrow(
+			() -> new EventNotFoundException("Could not find Event with ID [" + id + "]"));
 	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

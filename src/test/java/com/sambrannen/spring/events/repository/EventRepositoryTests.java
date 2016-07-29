@@ -60,8 +60,13 @@ class EventRepositoryTests {
 
 	@Test
 	void findOne() {
-		Event event = repo.findOne(1L);
-		assertThat(event).isNotNull();
+		assertThat(repo.findOne(1L)).isNotNull();
+	}
+
+	@Test
+	void findById() {
+		assertThat(repo.findById(1L)).isPresent();
+		assertThat(repo.findById(999L)).isNotPresent();
 	}
 
 	@Test
