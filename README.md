@@ -9,7 +9,7 @@ The following highlight the technologies used and features of the application.
 * Spring Framework 5.0 M1
 * JUnit 5.0 M2
 * TestNG
-* Simple POJO domain model: `Event`
+* Simple POJO `Event` domain model using JPA, Lombok, and Spring formatting annotations
 * Transactional service layer
 * Spring Data JPA repository layer
 * Spring @MVC + Thymeleaf & REST presentation layer
