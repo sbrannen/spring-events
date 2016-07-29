@@ -8,7 +8,7 @@ The following highlight the technologies used and features of the application.
 * Spring Boot 1.4
 * Spring Framework 5.0 M1
 * JUnit 5.0 M2
-* TesNG
+* TestNG
 * Simple POJO domain model: `Event`
 * Transactional service layer
 * Spring Data JPA repository layer
