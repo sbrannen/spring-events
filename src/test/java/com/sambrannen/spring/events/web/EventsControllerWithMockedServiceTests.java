@@ -29,8 +29,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -45,7 +43,7 @@ import com.sambrannen.spring.events.service.EventService;
  * @since 1.0
  */
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(includeFilters = @Filter(classes = EnableWebSecurity.class))
+@WebMvcTest(secure = false)
 class EventsControllerWithMockedServiceTests {
 
 	@MockBean
