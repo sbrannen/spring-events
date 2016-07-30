@@ -16,7 +16,6 @@
 
 package com.sambrannen.spring.events.web;
 
-import static org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint.SYSTEM_ERR;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.MOCK;
 
 import java.lang.annotation.Documented;
@@ -47,7 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = MOCK)
-@AutoConfigureMockMvc(print = SYSTEM_ERR)
+@AutoConfigureMockMvc // (print = MockMvcPrint.SYSTEM_ERR)
 @Transactional
 public @interface SpringEventsWebTest {
 }

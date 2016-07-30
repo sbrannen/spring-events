@@ -18,7 +18,6 @@ package com.sambrannen.spring.events.web;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint.SYSTEM_ERR;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.MOCK;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -29,6 +28,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.web.servlet.MockMvc;
+
 import org.testng.annotations.Test;
 
 /**
@@ -40,8 +40,8 @@ import org.testng.annotations.Test;
  * @see EventsControllerTests
  */
 @SpringBootTest(webEnvironment = MOCK)
-@AutoConfigureMockMvc(print = SYSTEM_ERR)
-public class EventsControllerTestNgTests extends AbstractTestNGSpringContextTests {
+@AutoConfigureMockMvc // (print = MockMvcPrint.SYSTEM_ERR)
+class EventsControllerTestNgTests extends AbstractTestNGSpringContextTests {
 
 	@Autowired
 	MockMvc mockMvc;
