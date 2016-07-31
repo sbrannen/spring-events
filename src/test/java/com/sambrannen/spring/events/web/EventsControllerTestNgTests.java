@@ -16,7 +16,7 @@
 
 package com.sambrannen.spring.events.web;
 
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.MOCK;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -48,10 +48,10 @@ class EventsControllerTestNgTests extends AbstractTestNGSpringContextTests {
 
 
 	@Test
-	void shouldDisplayAtLeastTenItemsInitially() throws Exception {
+	void listEvents() throws Exception {
 		mockMvc.perform(get("/"))
 			.andExpect(view().name("event/list"))
-			.andExpect(model().attribute("events", hasSize(greaterThanOrEqualTo(10))));
+			.andExpect(model().attribute("events", hasSize(greaterThan(10))));
 	}
 
 }
