@@ -49,12 +49,9 @@ class EventsControllerWithMockedServiceTests {
 	@MockBean
 	EventService eventService;
 
-	@Autowired
-	MockMvc mockMvc;
-
 
 	@Test
-	void listEvents() throws Exception {
+	void listEvents(@Autowired MockMvc mockMvc) throws Exception {
 		when(eventService.findAll()).thenReturn(singletonList(new Event(1L)));
 
 		mockMvc.perform(get("/"))//

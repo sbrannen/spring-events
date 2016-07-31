@@ -16,7 +16,7 @@
 
 package com.sambrannen.spring.events.web;
 
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -38,16 +38,12 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringEventsWebTest
 class EventsControllerTests {
 
-	@Autowired
-	MockMvc mockMvc;
-
-
 	@Test
-	@DisplayName("Home page should show at least 10 items")
-	void shouldDisplayAtLeastTenItemsInitially() throws Exception {
-		mockMvc.perform(get("/"))//
-				.andExpect(view().name("event/list"))//
-				.andExpect(model().attribute("events", hasSize(greaterThanOrEqualTo(10))));
+	@DisplayName("Home page should display more than 10 events")
+	void listEvents(@Autowired MockMvc mockMvc) throws Exception {
+		mockMvc.perform(get("/"))
+			.andExpect(view().name("event/list"))
+			.andExpect(model().attribute("events", hasSize(greaterThan(10))));
 	}
 
 }
