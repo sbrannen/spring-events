@@ -51,7 +51,7 @@ import com.sambrannen.spring.events.repository.EventRepository;
 @SpringBootTest(webEnvironment = MOCK)
 @AutoConfigureMockMvc(print = SYSTEM_ERR)
 @TestExecutionListeners(WithSecurityContextTestExecutionListener.class)
-public class SimpleScenarioTestNgTests extends AbstractTestNGSpringContextTests {
+class SimpleScenarioTestNgTests extends AbstractTestNGSpringContextTests {
 
 	@Autowired
 	MockMvc mockMvc;
