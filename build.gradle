@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.4.0.RELEASE'
+        springBootVersion = '1.4.1.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -44,8 +44,8 @@ ext.junitJupiterVersion    = '5.0.0-M2'
 ext.junitPlatformVersion   = '1.0.0-M2'
 ext.lombokVersion          = '1.16.10'
 ext.seleniumVersion        = '2.52.0'
-ext.springBootVersion      = '1.4.0.RELEASE'
 ext.testNGVersion          = '6.9.10'
+ext.springBootVersion      = '1.4.1.RELEASE'
 
 // Special syntax for overriding spring-boot-dependencies
 ext['hibernate.version']       = hibernateVersion
