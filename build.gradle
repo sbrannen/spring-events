@@ -44,8 +44,8 @@ ext.junitJupiterVersion    = '5.0.0-M2'
 ext.junitPlatformVersion   = '1.0.0-M2'
 ext.lombokVersion          = '1.16.10'
 ext.seleniumVersion        = '2.52.0'
-ext.testNGVersion          = '6.9.10'
 ext.springBootVersion      = '1.4.1.RELEASE'
+ext.testNGVersion          = '6.9.13.2'
 
 // Special syntax for overriding spring-boot-dependencies
 ext['hibernate.version']       = hibernateVersion
@@ -56,6 +56,7 @@ repositories {
     mavenCentral()
     maven { url "http://repo.spring.io/snapshot" }
     maven { url "http://repo.spring.io/milestone" }
+	jcenter() // for TestNG 6.9.11+
 }
 
 dependencies {
