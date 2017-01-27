@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2016 the original author or authors.
+ * Copyright 2010-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.sambrannen.spring.events.web;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -26,6 +27,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.sambrannen.spring.events.domain.Event;
+import com.sambrannen.spring.events.repository.EventRepository;
 
 import org.junit.jupiter.api.Test;
 
@@ -44,6 +48,9 @@ class RestEventsControllerTests {
 
 	@Autowired
 	MockMvc mockMvc;
+
+	@Autowired
+	EventRepository repo;
 
 
 	@Test
@@ -92,6 +99,9 @@ class RestEventsControllerTests {
 			put("/events/{id}", 9).contentType(APPLICATION_JSON)
 				.content("{\"name\": \"Edited\", \"location\": \"Integration Test\"}"))//
 			.andExpect(status().isNoContent());
+
+		Event updatedEvent = repo.findOne(9L);
+		assertThat(updatedEvent.getName()).isEqualTo("Edited");
 	}
 
 	@Test
@@ -99,6 +109,9 @@ class RestEventsControllerTests {
 	void deleteEvent() throws Exception {
 		mockMvc.perform(delete("/events/{id}", 9))//
 			.andExpect(status().isNoContent());
+
+		Event deletedEvent = repo.findOne(9L);
+		assertThat(deletedEvent).isNull();
 	}
 
 }
