@@ -22,7 +22,6 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import java.util.List;
 
-import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -78,18 +77,6 @@ public class RestEventsController {
 	@PutMapping("/{id}")
 	@ResponseStatus(NO_CONTENT)
 	public void updateEvent(@RequestBody Event updatedEvent, @PathVariable Long id) {
-		// Be default, for security reasons, we do not allow an 'id' field
-		// to be bound to a domain entity by external clients. However, since
-		// this is an update request, the 'id' must be set in the event.
-		// Otherwise, we save a new event instead of updating the existing one.
-		// And instead of introducing a public setId() method in Event, we
-		// choose to use Spring's DirectFieldAccessor to set the 'id', thereby
-		// allowing us to continue to discourage changing an ID of an existing
-		// event.
-		//
-		// See: GlobalControllerAdvice.configureBinding(WebDataBinder)
-		new DirectFieldAccessor(updatedEvent).setPropertyValue("id", id);
-
 		service.save(updatedEvent);
 	}
 

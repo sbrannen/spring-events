@@ -96,7 +96,7 @@ class RestEventsControllerTests {
 	@WithMockUser(roles = "ADMIN")
 	void updateEvent() throws Exception {
 
-		String json = "{\"eventDate\": \"2015-04-30\", \"name\": \"Edited\", \"location\": \"Integration Test\"}";
+		String json = "{\"id\": 9, \"eventDate\": \"2015-04-30\", \"name\": \"Edited\", \"location\": \"Integration Test\"}";
 
 		mockMvc.perform(
 			put("/events/{id}", 9).contentType(APPLICATION_JSON)
