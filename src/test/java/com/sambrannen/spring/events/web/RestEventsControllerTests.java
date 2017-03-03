@@ -146,7 +146,7 @@ class RestEventsControllerTests {
 
 // http -a admin:test POST http://localhost:8080/events/ name=Spring! location='Command Line'
 
-// http -a admin:test PUT http://localhost:8080/events/9 eventDate=2015-04-30 name=Edited location='Command Line'
+// http -a admin:test PUT http://localhost:8080/events/9 id=9 eventDate=2015-04-30 name=Edited location='Command Line'
 
 // http -a admin:test DELETE http://localhost:8080/events/9
 
@@ -160,6 +160,6 @@ class RestEventsControllerTests {
 
 // curl -u admin:test -i -X POST -H "Content-Type:application/json" http://localhost:8080/events/ -d '{"name": "Spring!", "location": "Command Line"}'
 
-// curl -u admin:test -i -X PUT -H "Content-Type:application/json" http://localhost:8080/events/9 -d '{"eventDate":"2015-04-30", "name": "Edited", "location": "Command Line"}'
+// curl -u admin:test -i -X PUT -H "Content-Type:application/json" http://localhost:8080/events/9 -d '{"id":"9", "eventDate":"2015-04-30", "name": "Edited", "location": "Command Line"}'
 
 // curl -u admin:test -i -X DELETE http://localhost:8080/events/9
