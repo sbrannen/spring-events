@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M3'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4'
 		classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
     }
 }
@@ -40,8 +40,8 @@ ext.hibernateVersion       = '5.2.8.Final'
 ext.htmlunitVersion        = '2.23'
 ext.jacksonDateTimeVersion = '2.8.7'
 ext.jsonpathVersion        = '2.2.0'
-ext.junitJupiterVersion    = '5.0.0-M3'
-ext.junitPlatformVersion   = '1.0.0-M3'
+ext.junitJupiterVersion    = '5.0.0-M4'
+ext.junitPlatformVersion   = '1.0.0-M4'
 ext.lombokVersion          = '1.16.14'
 ext.seleniumVersion        = '2.52.0'
 ext.springBootVersion      = '1.5.1.RELEASE'
@@ -88,6 +88,7 @@ dependencies {
 }
 
 junitPlatform {
+	details 'tree'
 	// Do NOT run JUnit 4 tests with the standard Gradle test task.
 	enableStandardTestTask false
 	// Only run JUnit Jupiter tests with the JUnit Platform
