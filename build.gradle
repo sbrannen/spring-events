@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.2.RELEASE'
+        springBootVersion = '1.5.3.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -44,11 +44,11 @@ ext.junitJupiterVersion    = '5.0.0-M4'
 ext.junitPlatformVersion   = '1.0.0-M4'
 ext.lombokVersion          = '1.16.14'
 ext.seleniumVersion        = '2.52.0'
-ext.springBootVersion      = '1.5.2.RELEASE'
+ext.springBootVersion      = '1.5.3.RELEASE'
 ext.testNGVersion          = '6.11'
 
 // Special syntax for overriding spring-boot-dependencies
-// https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/1.5.2.RELEASE/spring-boot-dependencies-1.5.2.RELEASE.pom
+// https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/1.5.3.RELEASE/spring-boot-dependencies-1.5.3.RELEASE.pom
 ext['hibernate.version']       = hibernateVersion
 ext['spring-security.version'] = '4.2.2.RELEASE'
 ext['spring.version']          = '5.0.0.M5'
