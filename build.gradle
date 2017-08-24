@@ -38,8 +38,8 @@ ext.assertJVersion         = '3.8.0'
 ext.h2Version              = '1.4.196'
 ext.hibernateVersion       = '5.2.10.Final'
 ext.htmlunitVersion        = '2.27'
-ext.jackson2Version        = '2.9.0.pr3'
-ext.jacksonDateTimeVersion = jackson2Version
+ext.jacksonVersion         = '2.9.0'
+ext.jacksonDateTimeVersion = jacksonVersion
 ext.jsonpathVersion        = '2.2.0'
 ext.junitJupiterVersion    = '5.0.0-RC3'
 ext.junitPlatformVersion   = '1.0.0-RC3'
@@ -51,7 +51,7 @@ ext.testNGVersion          = '6.12'
 // Special syntax for overriding spring-boot-dependencies
 // https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/1.5.6.RELEASE/spring-boot-dependencies-1.5.6.RELEASE.pom
 ext['hibernate.version']       = hibernateVersion
-ext['jackson.version']         = jackson2Version
+ext['jackson.version']         = jacksonVersion
 ext['spring-security.version'] = '4.2.3.RELEASE'
 ext['spring.version']          = '5.0.0.RC3'
 
