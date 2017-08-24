@@ -43,7 +43,7 @@ public class Application {
 	@Autowired
 	void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-			.withUser("admin").password("test").roles("ADMIN");
+			.withUser("admin").password("test").roles("ADMIN", "ACTUATOR");
 	}
 
 }
