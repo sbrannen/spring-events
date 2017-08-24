@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2016 the original author or authors.
+ * Copyright 2010-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,6 @@
 
 package com.sambrannen.spring.events.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -31,7 +29,4 @@ import com.sambrannen.spring.events.domain.Event;
  */
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
-
-	Optional<Event> findById(Long id);
-
 }

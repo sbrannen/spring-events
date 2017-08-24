@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.6.RELEASE'
+        springBootVersion = '2.0.0.M3'
     }
     repositories {
         mavenCentral()
@@ -45,7 +45,7 @@ ext.junitJupiterVersion    = '5.0.0-RC3'
 ext.junitPlatformVersion   = '1.0.0-RC3'
 ext.lombokVersion          = '1.16.18'
 ext.seleniumVersion        = '2.52.0'
-ext.springBootVersion      = '1.5.6.RELEASE'
+ext.springBootVersion      = '2.0.0.M3'
 ext.testNGVersion          = '6.12'
 
 // Special syntax for overriding spring-boot-dependencies
@@ -73,7 +73,6 @@ dependencies {
 
 	compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDateTimeVersion}")
 	compile("com.h2database:h2:${h2Version}")
-	compile("org.hibernate:hibernate-java8:${hibernateVersion}")
 	compile("org.projectlombok:lombok:${lombokVersion}")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")

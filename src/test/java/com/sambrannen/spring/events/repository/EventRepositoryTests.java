@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2016 the original author or authors.
+ * Copyright 2010-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,11 +59,6 @@ class EventRepositoryTests {
 	}
 
 	@Test
-	void findOne() {
-		assertThat(repo.findOne(1L)).isNotNull();
-	}
-
-	@Test
 	void findById() {
 		assertThat(repo.findById(1L)).isPresent();
 		assertThat(repo.findById(999L)).isNotPresent();
@@ -84,7 +79,7 @@ class EventRepositoryTests {
 
 		assertThat(savedEvent.getId()).isNotNull();
 		assertNumEvents(numRowsInTable + 1);
-		Event retrievedSavedEvent = repo.findOne(savedEvent.getId());
+		Event retrievedSavedEvent = repo.findById(savedEvent.getId()).orElse(null);
 		assertThat(retrievedSavedEvent).isEqualTo(event);
 		assertThat(retrievedSavedEvent.getEventDate()).isEqualTo(tomorrow);
 	}
@@ -93,7 +88,7 @@ class EventRepositoryTests {
 	void update() {
 		final int numRowsInTable = countNumEvents();
 
-		Event event = repo.findOne(1L);
+		Event event = repo.findById(1L).orElse(null);
 		assertThat(event).isNotNull();
 		event.setName("updated name");
 
@@ -109,7 +104,7 @@ class EventRepositoryTests {
 	void delete() {
 		final int numRowsInTable = countNumEvents();
 
-		Event event = repo.findOne(1L);
+		Event event = repo.findById(1L).orElse(null);
 		assertThat(event).isNotNull();
 		repo.delete(event);
 		repo.flush();

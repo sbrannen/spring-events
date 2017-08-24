@@ -28,6 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Optional;
+
 import com.sambrannen.spring.events.domain.Event;
 import com.sambrannen.spring.events.repository.EventRepository;
 
@@ -103,7 +105,7 @@ class RestEventsControllerTests {
 					.content(json))//
 			.andExpect(status().isNoContent());
 
-		Event updatedEvent = repo.findOne(9L);
+		Event updatedEvent = repo.findById(9L).get();
 		assertThat(updatedEvent.getName()).isEqualTo("Edited");
 	}
 
@@ -113,8 +115,8 @@ class RestEventsControllerTests {
 		mockMvc.perform(delete("/events/{id}", 9))//
 			.andExpect(status().isNoContent());
 
-		Event deletedEvent = repo.findOne(9L);
-		assertThat(deletedEvent).isNull();
+		Optional<Event> deletedEvent = repo.findById(9L);
+		assertThat(deletedEvent).isNotPresent();
 	}
 
 }
