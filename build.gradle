@@ -46,7 +46,7 @@ ext.junitPlatformVersion   = '1.0.0-RC3'
 ext.lombokVersion          = '1.16.14'
 ext.seleniumVersion        = '2.52.0'
 ext.springBootVersion      = '1.5.6.RELEASE'
-ext.testNGVersion          = '6.11'
+ext.testNGVersion          = '6.12'
 
 // Special syntax for overriding spring-boot-dependencies
 // https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/1.5.6.RELEASE/spring-boot-dependencies-1.5.6.RELEASE.pom
