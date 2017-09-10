@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC3'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
 		classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
     }
 }
@@ -41,8 +41,8 @@ ext.htmlunitVersion        = '2.27'
 ext.jacksonVersion         = '2.9.0'
 ext.jacksonDateTimeVersion = jacksonVersion
 ext.jsonpathVersion        = '2.4.0'
-ext.junitJupiterVersion    = '5.0.0-RC3'
-ext.junitPlatformVersion   = '1.0.0-RC3'
+ext.junitJupiterVersion    = '5.0.0'
+ext.junitPlatformVersion   = '1.0.0'
 ext.lombokVersion          = '1.16.18'
 ext.seleniumVersion        = '2.52.0'
 ext.springBootVersion      = '2.0.0.M3'
