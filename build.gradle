@@ -84,6 +84,9 @@ dependencies {
     testCompile("org.assertj:assertj-core:${assertJVersion}")
     testCompile("org.seleniumhq.selenium:selenium-htmlunit-driver:${seleniumVersion}")
     testCompile("org.testng:testng:${testNGVersion}")
+    testCompile("com.github.database-rider:rider-junit5:1.2.0") {
+        exclude group: 'org.slf4j'
+    }
 
 	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 }

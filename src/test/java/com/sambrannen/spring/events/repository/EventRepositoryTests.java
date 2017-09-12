@@ -16,13 +16,11 @@
 
 package com.sambrannen.spring.events.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.time.LocalDate;
-import java.util.List;
-
+import com.github.database.rider.core.api.connection.ConnectionHolder;
+import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.junit5.api.DBRider;
+import com.sambrannen.spring.events.domain.Event;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,7 +29,11 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sambrannen.spring.events.domain.Event;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Integration tests for the {@link EventRepository}.
@@ -42,6 +44,8 @@ import com.sambrannen.spring.events.domain.Event;
 @BootstrapWith(SpringBootTestContextBootstrapper.class)
 @SpringJUnitConfig(TestRepositoryConfig.class)
 @Transactional
+@DBRider //enables dbunit extension
+@DataSet("datasets/events.yml") //default dataset will be used if none is provided at test level
 class EventRepositoryTests {
 
 	@Autowired
@@ -50,18 +54,24 @@ class EventRepositoryTests {
 	@Autowired
 	EventRepository repo;
 
+	private ConnectionHolder connectionHolder = () ->
+			jdbcTemplate.getDataSource().getConnection();//will be read by DBUnitExtension via reflection in order to prepare database
+
 
 	@Test
 	void findAll() {
 		List<Event> events = repo.findAll();
-		assertThat(events).isNotNull();
+		assertThat(events).isNotNull().hasSize(5);
 		assertThat(events.size()).isGreaterThan(0);
 	}
 
 	@Test
 	void findById() {
-		assertThat(repo.findById(1L)).isPresent();
-		assertThat(repo.findById(999L)).isNotPresent();
+		Optional<Event> repoFound = this.repo.findById(1L);
+		assertThat(repoFound).isPresent();
+		assertThat(repoFound.get()).extracting("name")
+				.contains("Spring Geek Night");
+		assertThat(this.repo.findById(999L)).isNotPresent();
 	}
 
 	@Test
@@ -98,6 +108,14 @@ class EventRepositoryTests {
 		assertNumEvents(numRowsInTable);
 		String updatedName = lookUpNameInDatabase(updatedEvent);
 		assertThat(updatedName).isEqualTo("updated name");
+	}
+
+	@Test
+	void deleteAll() {
+		assertThat(repo.count()).isEqualTo(5);
+		repo.deleteAll();;
+		repo.flush();
+		assertThat(repo.count()).isEqualTo(0);
 	}
 
 	@Test

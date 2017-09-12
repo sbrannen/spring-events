@@ -1,0 +1,22 @@
+event:
+  - id: 1
+    event_date: 2010-02-25
+    name: Spring Geek Night
+    location: Zurich
+  - id: 2
+    event_date: 2011-02-17
+    name: Spring I/O
+    location: Madri
+  - id: 3
+    event_date: 2011-10-28
+    name: SpringOne 2GX
+    location: Chicago
+  - id: 4
+    event_date: 2012-10-18
+    name: SpringOne 2GX
+    location: Washington, D.C.
+  - id: 5
+    event_date: 2013-11-14
+    name: Devoxx
+    location: Antwerp
+
