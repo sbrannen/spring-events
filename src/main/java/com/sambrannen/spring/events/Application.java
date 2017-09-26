@@ -19,6 +19,7 @@ package com.sambrannen.spring.events;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
@@ -34,7 +35,9 @@ import com.sambrannen.spring.events.web.EventsController;
  */
 @SpringBootApplication(scanBasePackageClasses = { EventService.class, EventsController.class })
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class Application {
+// Extend WebMvcAutoConfiguration so that static web content is served when
+// launching the application as a Java Application within the Eclipse IDE.
+public class Application extends WebMvcAutoConfiguration {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
