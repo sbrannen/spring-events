@@ -1,21 +1,21 @@
 buildscript {
-    ext {
-        springBootVersion = '2.0.0.M3'
-    }
-    repositories {
-        mavenCentral()
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	ext {
+		springBootVersion = '2.0.0.M3'
+	}
+	repositories {
+		mavenCentral()
+		maven { url "http://repo.spring.io/snapshot" }
+		maven { url "http://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
 		classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
-    }
+	}
 }
 
 plugins {
-    id 'io.spring.dependency-management' version '1.0.3.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.3.RELEASE'
 }
 
 apply plugin: 'java'
@@ -27,8 +27,8 @@ apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: 'com.github.ben-manes.versions' // gradle dependencyUpdates
 
 jar {
-    baseName = 'spring-events'
-    version = '1.0.0-SNAPSHOT'
+	baseName = 'spring-events'
+	version = '1.0.0-SNAPSHOT'
 }
 
 sourceCompatibility = 1.8
@@ -56,34 +56,34 @@ ext['spring-security.version'] = '5.0.0.M3'
 ext['spring.version']          = '5.0.0.RC3'
 
 repositories {
-    mavenCentral()
-    maven { url "http://repo.spring.io/snapshot" }
-    maven { url "http://repo.spring.io/milestone" }
+	mavenCentral()
+	maven { url "http://repo.spring.io/snapshot" }
+	maven { url "http://repo.spring.io/milestone" }
 	jcenter() // for TestNG 6.9.11+
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile("org.springframework.boot:spring-boot-starter-aop")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("org.springframework.boot:spring-boot-starter-jdbc")
-    compile("org.springframework.boot:spring-boot-starter-security")
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-    compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-actuator")
+	compile("org.springframework.boot:spring-boot-starter-aop")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.springframework.boot:spring-boot-starter-jdbc")
+	compile("org.springframework.boot:spring-boot-starter-security")
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile("org.springframework.boot:spring-boot-starter-web")
 
 	compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDateTimeVersion}")
 	compile("com.h2database:h2:${h2Version}")
 	compile("org.projectlombok:lombok:${lombokVersion}")
 
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    testCompile("org.springframework.security:spring-security-test")
+	testCompile("org.springframework.boot:spring-boot-starter-test")
+	testCompile("org.springframework.security:spring-security-test")
 	testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
 	testCompile("org.junit.platform:junit-platform-runner:${junitPlatformVersion}")
-    testCompile("com.jayway.jsonpath:json-path:${jsonpathVersion}")
-    testCompile("net.sourceforge.htmlunit:htmlunit:${htmlunitVersion}")
-    testCompile("org.assertj:assertj-core:${assertJVersion}")
-    testCompile("org.seleniumhq.selenium:selenium-htmlunit-driver:${seleniumVersion}")
-    testCompile("org.testng:testng:${testNGVersion}")
+	testCompile("com.jayway.jsonpath:json-path:${jsonpathVersion}")
+	testCompile("net.sourceforge.htmlunit:htmlunit:${htmlunitVersion}")
+	testCompile("org.assertj:assertj-core:${assertJVersion}")
+	testCompile("org.seleniumhq.selenium:selenium-htmlunit-driver:${seleniumVersion}")
+	testCompile("org.testng:testng:${testNGVersion}")
 
 	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 }
