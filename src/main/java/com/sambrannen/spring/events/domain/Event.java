@@ -54,7 +54,7 @@ public class Event implements Serializable {
 
 	@NotNull(message = "{errors.required}")
 	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate eventDate = LocalDate.now();
+	private LocalDate eventDate;
 
 	@NotNull(message = "{errors.required}")
 	@Size(min = 5, max = 30, message = "{errors.range}")
@@ -66,11 +66,26 @@ public class Event implements Serializable {
 
 
 	public Event() {
+		// It's necessary to set this here instead of at the field declaration
+		// since Jackson will otherwise set the value to null.
+		this.eventDate = LocalDate.now();
 	}
 
 	public Event(Long id) {
 		this();
 		this.id = id;
+	}
+
+	public Event(String name, String location) {
+		this();
+		this.name = name;
+		this.location = location;
+	}
+
+	public Event(Long id, LocalDate eventDate, String name, String location) {
+		this(name, location);
+		this.id = id;
+		this.eventDate = eventDate;
 	}
 
 }
