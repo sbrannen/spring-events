@@ -22,6 +22,8 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,6 +50,8 @@ import com.sambrannen.spring.events.service.EventService;
 @RequestMapping("/events")
 public class RestEventsController {
 
+	private static final Log log = LogFactory.getLog(RestEventsController.class);
+
 	private final EventService service;
 
 	public RestEventsController(EventService service) {
@@ -56,16 +60,20 @@ public class RestEventsController {
 
 	@GetMapping
 	public List<Event> retrieveAllEvents() {
+		log.debug("Retrieving all events");
 		return service.findAll();
 	}
 
 	@GetMapping("/{id}")
 	public Event retrieveEvent(@PathVariable Long id) {
+		log.debug("Finding event with ID: " + id);
 		return service.findById(id);
 	}
 
 	@PostMapping
 	public HttpEntity<Void> createEvent(@RequestBody Event postedEvent) {
+		log.debug("Creating event: " + postedEvent);
+
 		Event savedEvent = service.save(postedEvent);
 
 		UriComponents uriComponents = fromMethodCall(
@@ -77,12 +85,14 @@ public class RestEventsController {
 	@PutMapping("/{id}")
 	@ResponseStatus(NO_CONTENT)
 	public void updateEvent(@RequestBody Event updatedEvent, @PathVariable Long id) {
+		log.debug("Updating event: " + updatedEvent);
 		service.save(updatedEvent);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(NO_CONTENT)
 	public void deleteEvent(@PathVariable Long id) {
+		log.debug("Deleting event with ID: " + id);
 		service.deleteById(id);
 	}
 
