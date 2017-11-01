@@ -53,7 +53,7 @@ ext.testNGVersion          = '6.12'
 ext['hibernate.version']       = hibernateVersion
 ext['jackson.version']         = jacksonVersion
 ext['spring-security.version'] = '5.0.0.M5'
-ext['spring.version']          = '5.0.0.RELEASE'
+ext['spring.version']          = '5.0.1.RELEASE'
 
 repositories {
 	mavenCentral()
