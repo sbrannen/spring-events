@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.M5'
+		springBootVersion = '2.0.0.M6'
 	}
 	repositories {
 		mavenCentral()
@@ -9,7 +9,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.1'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
 		classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
 	}
 }
@@ -41,19 +41,19 @@ ext.htmlunitVersion        = '2.27'
 ext.jacksonVersion         = '2.9.0'
 ext.jacksonDateTimeVersion = jacksonVersion
 ext.jsonpathVersion        = '2.4.0'
-ext.junitJupiterVersion    = '5.0.1'
-ext.junitPlatformVersion   = '1.0.1'
+ext.junitJupiterVersion    = '5.0.2'
+ext.junitPlatformVersion   = '1.0.2'
 ext.lombokVersion          = '1.16.18'
 ext.seleniumVersion        = '2.52.0'
-ext.springBootVersion      = '2.0.0.M5'
-ext.testNGVersion          = '6.12'
+ext.springBootVersion      = '2.0.0.M6'
+ext.testNGVersion          = '6.13.1'
 
 // Special syntax for overriding spring-boot-dependencies
 // https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/1.5.6.RELEASE/spring-boot-dependencies-1.5.6.RELEASE.pom
 ext['hibernate.version']       = hibernateVersion
 ext['jackson.version']         = jacksonVersion
-ext['spring-security.version'] = '5.0.0.M5'
-ext['spring.version']          = '5.0.1.RELEASE'
+ext['spring-security.version'] = '5.0.0.RELEASE'
+ext['spring.version']          = '5.0.2.RELEASE'
 
 repositories {
 	mavenCentral()

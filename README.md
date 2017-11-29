@@ -4,11 +4,11 @@ _Spring Events_ is a sample application that demonstrates how to implement and t
 
 The following highlight the technologies used and features of the application.
 
-* Spring Framework 5.0 GA
-* Spring Boot 2.0 M4
-* Spring Security 5.0 M4
-* JUnit 5.0 GA
-* TestNG 6.12
+* Spring Framework 5.0.2
+* Spring Boot 2.0.0 M6
+* Spring Security 5.0.0
+* JUnit 5.0.2
+* TestNG 6.13.1
 * Simple POJO `Event` domain entity using JPA, Bean Validation, Lombok, and Spring formatting annotations
 * Transactional service layer
 * Spring Data JPA repository layer
