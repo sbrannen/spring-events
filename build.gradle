@@ -9,7 +9,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.3'
 		classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
 	}
 }
@@ -41,8 +41,8 @@ ext.htmlunitVersion        = '2.27'
 ext.jacksonVersion         = '2.9.0'
 ext.jacksonDateTimeVersion = jacksonVersion
 ext.jsonpathVersion        = '2.4.0'
-ext.junitJupiterVersion    = '5.0.2'
-ext.junitPlatformVersion   = '1.0.2'
+ext.junitJupiterVersion    = '5.0.3'
+ext.junitPlatformVersion   = '1.0.3'
 ext.lombokVersion          = '1.16.18'
 ext.seleniumVersion        = '2.52.0'
 ext.springBootVersion      = '2.0.0.M7'
@@ -84,11 +84,6 @@ dependencies {
 	testCompile("org.assertj:assertj-core:${assertJVersion}")
 	testCompile("org.seleniumhq.selenium:selenium-htmlunit-driver:${seleniumVersion}")
 	testCompile("org.testng:testng:${testNGVersion}")
-
-	// The following dependency is necessary to avoid compiler warnings about
-	// not being able to find the Status enum used by the @API annotation when
-	// compiling test sources that use JUnit Jupiter.
-	testCompileOnly('org.apiguardian:apiguardian-api:1.0.0')
 
 	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 }
