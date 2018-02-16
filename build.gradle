@@ -9,7 +9,6 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.3'
 		classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
 	}
 }
@@ -23,7 +22,6 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: 'com.github.ben-manes.versions' // gradle dependencyUpdates
 
 jar {
@@ -88,14 +86,6 @@ dependencies {
 	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 }
 
-junitPlatform {
-	details 'tree'
-	// Do NOT run JUnit 4 tests with the standard Gradle test task.
-	enableStandardTestTask false
-	// Only run JUnit Jupiter tests with the JUnit Platform
-	filters.engines.include 'junit-jupiter'
-}
-
 task testNG(type: Test) {
 	description = 'Runs TestNG tests.'
 	useTestNG()
@@ -107,9 +97,14 @@ task testNG(type: Test) {
 }
 
 test {
-	description = 'Runs JUnit 4 tests.'
+	description = 'Runs JUnit Platform tests.'
 	dependsOn testNG
-	useJUnit()
+	useJUnitPlatform()
+
+	testLogging {
+		// events "passed", "skipped", "failed", "standardOut", "standardError"
+		events "passed", "skipped", "failed"
+	}
 
 	scanForTestClasses = false
 	include '**/*Tests.class'
@@ -129,5 +124,5 @@ task aggregateTestReports(type: TestReport) {
 check.dependsOn aggregateTestReports
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '4.5'
+	gradleVersion = '4.6-rc-1'
 }
