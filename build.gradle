@@ -1,11 +1,11 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.RC1'
+		springBootVersion = '2.0.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
-		maven { url "http://repo.spring.io/snapshot" }
-		maven { url "http://repo.spring.io/milestone" }
+		// maven { url "http://repo.spring.io/snapshot" }
+		// maven { url "http://repo.spring.io/milestone" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -41,7 +41,7 @@ ext.jsonpathVersion        = '2.4.0'
 ext.junitJupiterVersion    = '5.1.0'
 ext.junitPlatformVersion   = '1.1.0'
 ext.lombokVersion          = '1.16.20'
-ext.springBootVersion      = '2.0.0.RC1'
+ext.springBootVersion      = '2.0.0.RELEASE'
 ext.testNGVersion          = '6.13.1'
 
 // Special syntax for overriding spring-boot-dependencies
@@ -53,8 +53,8 @@ ext['spring.version']          = '5.0.4.RELEASE'
 
 repositories {
 	mavenCentral()
-	maven { url "http://repo.spring.io/snapshot" }
-	maven { url "http://repo.spring.io/milestone" }
+	// maven { url "http://repo.spring.io/snapshot" }
+	// maven { url "http://repo.spring.io/milestone" }
 	jcenter() // for TestNG 6.9.11+
 }
 
