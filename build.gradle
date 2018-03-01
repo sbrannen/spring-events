@@ -59,17 +59,16 @@ repositories {
 }
 
 dependencies {
-	compile("org.springframework.boot:spring-boot-starter-actuator")
-	compile("org.springframework.boot:spring-boot-starter-aop")
+	compileOnly("org.projectlombok:lombok:${lombokVersion}")
+
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-	compile("org.springframework.boot:spring-boot-starter-jdbc")
 	compile("org.springframework.boot:spring-boot-starter-security")
-	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 	compile("org.springframework.boot:spring-boot-starter-web")
 
-	compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDateTimeVersion}")
-	compile("com.h2database:h2:${h2Version}")
-	compile("org.projectlombok:lombok:${lombokVersion}")
+	runtime("org.springframework.boot:spring-boot-starter-actuator")
+	runtime("org.springframework.boot:spring-boot-starter-thymeleaf")
+	runtime("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDateTimeVersion}")
+	runtime("com.h2database:h2:${h2Version}")
 
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 	testCompile("org.springframework.security:spring-security-test")
