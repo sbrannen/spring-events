@@ -32,9 +32,9 @@ jar {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-ext.assertJVersion         = '3.8.0'
+ext.assertJVersion         = '3.9.1'
 ext.h2Version              = '1.4.196'
-ext.hibernateVersion       = '5.2.10.Final'
+ext.hibernateVersion       = '5.2.14.Final'
 ext.htmlunitVersion        = '2.27'
 ext.jacksonVersion         = '2.9.0'
 ext.jacksonDateTimeVersion = jacksonVersion
