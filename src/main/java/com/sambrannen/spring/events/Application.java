@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2016 the original author or authors.
+ * Copyright 2010-2018 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.sambrannen.spring.events.service.EventService;
 import com.sambrannen.spring.events.web.EventsController;
@@ -45,8 +46,14 @@ public class Application extends WebMvcAutoConfiguration {
 
 	@Autowired
 	void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		// @formatter:off
 		auth.inMemoryAuthentication()
-			.withUser("admin").password("test").roles("ADMIN", "ACTUATOR");
+			.passwordEncoder(new BCryptPasswordEncoder())
+			.withUser("admin")
+				// "test" is encoded using BCryptPasswordEncoder
+				.password("$2a$10$ygTOAyJCpUirdPv9NufL9.IEBz1OHwSdD88Faf/0ZE6.MxWEsTWjW")
+				.roles("ADMIN", "ACTUATOR");
+		// @formatter:on
 	}
 
 }
