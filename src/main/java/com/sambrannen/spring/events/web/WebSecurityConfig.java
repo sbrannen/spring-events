@@ -42,10 +42,10 @@ public class WebSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
-				.antMatcher("/events/**")
+				.mvcMatcher("/events/**")
 				.authorizeRequests()
-					.antMatchers(GET, "/**").permitAll()
-					.antMatchers("/**").hasRole("ADMIN")
+					.mvcMatchers(GET, "/**").permitAll()
+					.mvcMatchers("/**").hasRole("ADMIN")
 					.and()
 				.csrf().disable()
 				.httpBasic();
@@ -58,14 +58,14 @@ public class WebSecurityConfig {
 
 		@Override
 		public void configure(WebSecurity web) throws Exception {
-			web.ignoring().antMatchers("/", "/favicon.ico", "/css/**", "/images/**");
+			web.ignoring().mvcMatchers("/", "/favicon.ico", "/css/**", "/images/**");
 		}
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
 				.authorizeRequests()
-					.antMatchers("/form**", "/h2-console/**").hasRole("ADMIN")
+					.mvcMatchers("/form**", "/h2-console/**").hasRole("ADMIN")
 					.and()
 				.csrf().disable()
 				.formLogin();
