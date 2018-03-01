@@ -41,7 +41,6 @@ ext.jsonpathVersion        = '2.4.0'
 ext.junitJupiterVersion    = '5.1.0'
 ext.junitPlatformVersion   = '1.1.0'
 ext.lombokVersion          = '1.16.20'
-ext.seleniumVersion        = '2.52.0'
 ext.springBootVersion      = '2.0.0.RC1'
 ext.testNGVersion          = '6.13.1'
 
@@ -78,7 +77,6 @@ dependencies {
 	testCompile("org.junit.platform:junit-platform-runner:${junitPlatformVersion}")
 	testCompile("com.jayway.jsonpath:json-path:${jsonpathVersion}")
 	testCompile("org.assertj:assertj-core:${assertJVersion}")
-	testCompile("org.seleniumhq.selenium:selenium-htmlunit-driver:${seleniumVersion}")
 	testCompile("org.testng:testng:${testNGVersion}")
 
 	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
