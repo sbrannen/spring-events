@@ -116,7 +116,7 @@ test {
 }
 
 task aggregateTestReports(type: TestReport) {
-	description = 'Aggregates JUnit 4 and TestNG test reports.'
+	description = 'Aggregates JUnit and TestNG test reports.'
 	destinationDir = test.reports.html.destination
 	reportOn test, testNG
 }
@@ -124,5 +124,5 @@ task aggregateTestReports(type: TestReport) {
 check.dependsOn aggregateTestReports
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '4.6-rc-1'
+	gradleVersion = '4.6'
 }
