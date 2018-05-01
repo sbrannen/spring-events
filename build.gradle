@@ -119,5 +119,5 @@ task aggregateTestReports(type: TestReport) {
 check.dependsOn aggregateTestReports
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '4.6'
+	gradleVersion = '4.7'
 }
