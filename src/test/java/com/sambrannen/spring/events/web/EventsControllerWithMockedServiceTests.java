@@ -23,17 +23,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import com.sambrannen.spring.events.domain.Event;
+import com.sambrannen.spring.events.service.EventService;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import com.sambrannen.spring.events.domain.Event;
-import com.sambrannen.spring.events.service.EventService;
 
 /**
  * Integration tests for the {@link EventsController} with a mocked
@@ -42,13 +39,11 @@ import com.sambrannen.spring.events.service.EventService;
  * @author Sam Brannen
  * @since 1.0
  */
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(secure = false)
+@WebMvcTest
 class EventsControllerWithMockedServiceTests {
 
 	@MockBean
 	EventService eventService;
-
 
 	@Test
 	void listEvents(@Autowired MockMvc mockMvc) throws Exception {

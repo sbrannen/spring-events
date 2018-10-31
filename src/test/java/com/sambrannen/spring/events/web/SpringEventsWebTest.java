@@ -16,8 +16,6 @@
 
 package com.sambrannen.spring.events.web;
 
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.MOCK;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -25,11 +23,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -44,8 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Documented
 @Inherited
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = MOCK)
+@SpringBootTest
 @AutoConfigureMockMvc // (print = MockMvcPrint.SYSTEM_ERR)
 @Transactional
 public @interface SpringEventsWebTest {

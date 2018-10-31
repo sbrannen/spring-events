@@ -17,21 +17,19 @@
 package com.sambrannen.spring.events.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.BootstrapWith;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.test.jdbc.JdbcTestUtils;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.sambrannen.spring.events.domain.Event;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.jdbc.JdbcTestUtils;
 
 /**
  * Integration tests for the {@link EventRepository}.
@@ -39,23 +37,24 @@ import com.sambrannen.spring.events.domain.Event;
  * @author Sam Brannen
  * @since 1.0
  */
-@BootstrapWith(SpringBootTestContextBootstrapper.class)
-@SpringJUnitConfig(TestRepositoryConfig.class)
-@Transactional
+@DataJpaTest(showSql = true)
+@TestInstance(PER_CLASS)
 class EventRepositoryTests {
 
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+	private final JdbcTemplate jdbcTemplate;
+
+	private final EventRepository repo;
 
 	@Autowired
-	EventRepository repo;
-
+	EventRepositoryTests(JdbcTemplate jdbcTemplate, EventRepository repo) {
+		this.jdbcTemplate = jdbcTemplate;
+		this.repo = repo;
+	}
 
 	@Test
 	void findAll() {
 		List<Event> events = repo.findAll();
-		assertThat(events).isNotNull();
-		assertThat(events.size()).isGreaterThan(0);
+		assertThat(events).size().isGreaterThan(0);
 	}
 
 	@Test

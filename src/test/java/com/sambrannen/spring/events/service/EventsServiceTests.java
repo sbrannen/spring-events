@@ -18,16 +18,14 @@ package com.sambrannen.spring.events.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.sambrannen.spring.events.domain.Event;
+import com.sambrannen.spring.events.repository.EventRepository;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.sambrannen.spring.events.domain.Event;
-import com.sambrannen.spring.events.repository.EventRepository;
 
 /**
  * Integration tests for the {@link EventService}.
@@ -35,7 +33,6 @@ import com.sambrannen.spring.events.repository.EventRepository;
  * @author Sam Brannen
  * @since 1.0
  */
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
 class EventsServiceTests {
@@ -46,10 +43,9 @@ class EventsServiceTests {
 	@Autowired
 	EventRepository repo;
 
-
 	@Test
 	@WithMockUser(roles = "ADMIN")
-	void save() throws Exception {
+	void save() {
 		service.save(new Event("new event", "integration test"));
 
 		assertThat(repo.findAll().stream().filter(e -> e.getName().equals("new event")).findFirst()).isPresent();
