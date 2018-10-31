@@ -4,7 +4,7 @@ _Spring Events_ is a sample application that demonstrates how to implement and t
 
 The following highlight the technologies used and features of the application.
 
-* Java 8
+* Java 11
 * Spring Framework 5.1.2
 * Spring Boot 2.1.0
 * Spring Security 5.1.1
