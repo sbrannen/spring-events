@@ -47,6 +47,7 @@ repositories {
 }
 
 dependencies {
+	annotationProcessor("org.projectlombok:lombok")
 	compileOnly("org.projectlombok:lombok")
 
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -105,5 +106,5 @@ task aggregateTestReports(type: TestReport) {
 check.dependsOn aggregateTestReports
 
 wrapper {
-	gradleVersion = '4.10.2'
+	gradleVersion = '5.0'
 }
