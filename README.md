@@ -8,7 +8,7 @@ The following highlight the technologies used and features of the application.
 * Spring Framework 5.1.5
 * Spring Boot 2.1.3
 * Spring Security 5.1.4
-* JUnit 5.4.0
+* JUnit 5.5.0
 * TestNG 6.14.3
 * Simple POJO `Event` domain entity using JPA, Bean Validation, and Spring formatting annotations
 * Transactional service layer
