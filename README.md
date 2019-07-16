@@ -10,7 +10,7 @@ The following highlight the technologies used and features of the application.
 * Spring Security 5.1.4
 * JUnit 5.4.0
 * TestNG 6.14.3
-* Simple POJO `Event` domain entity using JPA, Bean Validation, Lombok, and Spring formatting annotations
+* Simple POJO `Event` domain entity using JPA, Bean Validation, and Spring formatting annotations
 * Transactional service layer
 * Spring Data JPA repository layer
 * Spring @MVC + Thymeleaf & REST presentation layer
