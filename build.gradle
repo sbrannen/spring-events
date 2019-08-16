@@ -38,6 +38,7 @@ ext.testNGVersion = '6.14.3'
 ext['junit-jupiter.version']   = '5.5.1'
 // ext['spring-security.version'] = '5.0.8.RELEASE'
 // ext['spring.version']          = '5.1.4.RELEASE'
+ext['hamcrest.version']           = '2.1'
 
 repositories {
 	mavenCentral()
