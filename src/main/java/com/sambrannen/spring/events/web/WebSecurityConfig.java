@@ -57,7 +57,7 @@ public class WebSecurityConfig {
 	public static class FormLoginWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		@Override
-		public void configure(WebSecurity web) throws Exception {
+		public void configure(WebSecurity web) {
 			web.ignoring().mvcMatchers("/", "/favicon.ico", "/css/**", "/images/**");
 		}
 
