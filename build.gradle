@@ -1,77 +1,58 @@
-buildscript {
-	ext {
-		springBootVersion = '2.2.0.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-		// maven { url "http://repo.spring.io/snapshot" }
-		// maven { url "http://repo.spring.io/milestone" }
-		jcenter() // for gradle-versions-plugin
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath('com.github.ben-manes:gradle-versions-plugin:0.27.0')
-	}
+plugins {
+	id 'org.springframework.boot' version '2.2.0.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'com.github.ben-manes.versions' version '0.24.0' // gradle dependencyUpdates
+	id 'java'
+	id 'eclipse'
+	id 'idea'
+	id 'maven'
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'maven'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'com.github.ben-manes.versions' // gradle dependencyUpdates
-
-jar {
-	baseName = 'spring-events'
-	version = '1.0.0-SNAPSHOT'
-}
+group = 'com.sambrannen'
+version = '1.0.0-SNAPSHOT'
 
 sourceCompatibility = 11
 targetCompatibility = 11
 
-ext.testNGVersion = '7.0.0'
-
 // Special syntax for overriding spring-boot-dependencies
 // https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/2.2.0.RELEASE/spring-boot-dependencies-2.2.0.RELEASE.pom
-// ext['hibernate.version']       = hibernateVersion
 // ext['junit-jupiter.version']   = '5.5.2'
 // ext['spring-security.version'] = '5.2.0.RELEASE'
 // ext['spring.version']          = '5.2.0.RELEASE'
-// ext['hamcrest.version']        = '2.1'
 
 repositories {
 	mavenCentral()
-	// maven { url "http://repo.spring.io/snapshot" }
-	// maven { url "http://repo.spring.io/milestone" }
-	jcenter() // for TestNG
+	// maven { url 'http://repo.spring.io/snapshot' }
+	// maven { url 'http://repo.spring.io/milestone' }
 }
 
 dependencies {
-	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-	compile("org.springframework.boot:spring-boot-starter-security")
-	compile("org.springframework.boot:spring-boot-starter-web")
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+	implementation('org.springframework.boot:spring-boot-starter-security')
+	implementation('org.springframework.boot:spring-boot-starter-web')
 
-	runtime("org.springframework.boot:spring-boot-starter-actuator")
-	runtime("org.springframework.boot:spring-boot-starter-thymeleaf")
-	runtime("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-	runtime("com.h2database:h2")
+	runtimeOnly('org.springframework.boot:spring-boot-starter-actuator')
+	runtimeOnly('org.springframework.boot:spring-boot-starter-thymeleaf')
+	runtimeOnly('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+	runtimeOnly('com.h2database:h2')
 
-	testCompile("org.springframework.boot:spring-boot-starter-test")
-	testCompile("org.springframework.security:spring-security-test")
-	testCompile("org.junit.jupiter:junit-jupiter-api")
-	testCompile("org.junit.platform:junit-platform-runner")
-	testCompile("org.testng:testng:${testNGVersion}")
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation('org.springframework.security:spring-security-test')
+	testImplementation('org.junit.jupiter:junit-jupiter-api')
+	testImplementation('org.junit.platform:junit-platform-runner')
+	testImplementation('org.testng:testng:7.0.0')
 
-	testRuntime("org.junit.jupiter:junit-jupiter-engine")
+	testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine')
 }
 
 task junit(type: Test) {
 	description = 'Runs tests on the JUnit Platform.'
 	useJUnitPlatform()
 	testLogging {
-		// events "passed", "skipped", "failed", "standardOut", "standardError"
-		events "passed", "skipped", "failed"
+		// events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+		events 'passed', 'skipped', 'failed'
 	}
 	include '**/*Tests.class'
 	exclude '**/*TestNg*.*'
@@ -80,6 +61,10 @@ task junit(type: Test) {
 task testNG(type: Test) {
 	description = 'Runs TestNG tests.'
 	useTestNG()
+	testLogging {
+		// events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+		events 'passed', 'skipped', 'failed'
+	}
 	scanForTestClasses = false
 	include '**/*TestNgTests.class'
 	// Show STD_OUT & STD_ERR of the test JVM(s) on the console:
@@ -88,9 +73,9 @@ task testNG(type: Test) {
 }
 
 test {
-	description = "Runs all tests."
+	description = 'Runs all tests.'
 	dependsOn junit, testNG
-	exclude(["**/*.*"])
+	exclude(['**/*.*'])
 }
 
 task aggregateTestReports(type: TestReport) {
